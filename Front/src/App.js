@@ -6,13 +6,13 @@ import axios from 'axios';
 
 const  App = () => {
 
-    const  [msg, setmsg] = useState("");
+    const  [msg, setMsg] = useState("");
     const handleClick = async() => {
 
         const data = await fetch('/first');
         const json = data.json();
-        const msg = json.msg
-        setmsg(msg)
+        const msg = json.msg;
+        setMsg(msg);
 
     }
 
