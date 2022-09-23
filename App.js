@@ -20,7 +20,8 @@ const Client_ID = '9f0488cb2b5948e09954ff6bbfaa3c54';
 const redirect = "http://localhost.8888/first";
 const state = generateRandomString(16)
 const stateKey = 'spotify_auth_state';
-localStorage.setItem(stateKey, state);
+
+const item = localStorage.setItem(stateKey, state);
 var scope = ['user-read-private user-read-email'];
 
 var url = 'https://accounts.spotify.com/authorize';
