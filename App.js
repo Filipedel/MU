@@ -22,16 +22,14 @@ const state = generateRandomString(16)
 const stateKey = 'spotify_auth_state';
 const scope = 'user-read-private user-read-email';
 
-let url = 'https://accounts.spotify.com/authorize';
-url += '?response_type=token';
-url += '&client_id=' + encodeURIComponent(Client_ID);
-url += '&scope=' + encodeURIComponent(scope);
-url += '&redirect_uri=' + encodeURIComponent(redirect);
-url += '&state=' + encodeURIComponent(state);
-
-
-
 app.get("/first", (req,res)=>{
+  let url = 'https://accounts.spotify.com/authorize';
+  url += '?response_type=token';
+  url += '&client_id=' + encodeURIComponent(Client_ID);
+  url += '&scope=' + encodeURIComponent(scope);
+  url += '&redirect_uri=' + encodeURIComponent(redirect);
+  url += '&state=' + encodeURIComponent(state);
+  console.log(url)
   res.send({
     msg: url
   })

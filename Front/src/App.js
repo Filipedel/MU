@@ -9,7 +9,7 @@ const  App = () => {
     const  [message, setMsg] = useState("");
     const handleClick = async() => {
 
-        const data = await fetch('/first');
+        const data = await window.fetch('/first');
         const json = data.json();
         const msg = json.msg;
         setMsg(msg);
