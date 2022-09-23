@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const  App = () => {
 
-    const  [msg, setMsg] = useState("");
+    const  [message, setMsg] = useState("");
     const handleClick = async() => {
 
         const data = await fetch('/first');
@@ -19,8 +19,8 @@ const  App = () => {
     return (
         <div className="container">
             <button onClick={handleClick}>login to spotify</button>
-            {console.log(msg)}
-            <p>{msg}</p>
+            {console.log(message)}
+            <p>{message}</p>
             <button >Get play</button>
         </div>
     );
