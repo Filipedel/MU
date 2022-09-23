@@ -19,6 +19,7 @@ const  App = () => {
     return (
         <div className="container">
             <button onClick={handleClick}>login to spotify</button>
+            {console.log(msg)}
             <p>{msg}</p>
             <button >Get play</button>
         </div>
