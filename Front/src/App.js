@@ -11,7 +11,7 @@ const  App = () => {
 
         const data = await window.fetch('/first');
         const json = data.json();
-        const msg = json.msg;
+        const msg = json.url;
         setMsg(msg);
 
     }
