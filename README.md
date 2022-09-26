@@ -4,3 +4,5 @@
 
 
 [![GitHub license](https://img.shields.io/github/license/Filipedel/MU)](https://github.com/Filipedel/MU/blob/main/License.md)
+[![GitHub issues](https://img.shields.io/github/issues/Filipedel/mu)](https://github.com/Filipedel/mu/issues)
+
