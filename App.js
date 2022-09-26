@@ -22,24 +22,10 @@ var spotifyweb = new spotify();
 
 spotifyweb.setCredentials({clientId:Client_ID,clientSecret: Secret, redirectUri: redirect});
 
-spotify(spotifyweb.getCredentials()).authorizationCodeGrant(code).then(
-    function(data) {
-        console.log('The token expires in ' + data.body['expires_in']);
-        console.log('The access token is ' + data.body['access_token']);
-        console.log('The refresh token is ' + data.body['refresh_token']);
-
-        // Set the access token on the API object to use it in later calls
-        spotifyweb.setAccessToken(data.body['access_token']);
-        spotifyweb.setRefreshToken(data.body['refresh_token']);
-    },
-    function(err) {
-        console.log('Something went wrong!', err);
-    }
-);
 app.get("/first", (req,res)=>{
 //sending the response to the front
 res.send({
-  token: spotifyweb.getAccessToken()
+  token: spotifyweb.getClientId()
 })
 })
 
