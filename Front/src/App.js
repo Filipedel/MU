@@ -1,27 +1,29 @@
 import './App.css';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Component} from "react";
 import axios from 'axios';
+const spotifyApi = require("spotify-web-api-node")
+
+
+const App = () => {
+
+   const [token, settoken] = useState("");
 
 
 
-const  App = () => {
 
-    const  [message, setMsg] = useState("");
-    const handleClick = async() => {
+   const Login = async () => {
+       const data = await fetch('/first');
+       const body = await data.json();
+       settoken(body.token);
+   }
 
-        const data = await window.fetch('/first');
-        const json = data.json();
-        const msg = json.url;
-        setMsg(msg);
-
-    }
 
     return (
-        <div className="container">
-            <button onClick={handleClick}>login to spotify</button>
-            {console.log(message)}
-            <p>{message}</p>
-            <button >Get play</button>
+        <div className="App">
+            <body>
+            <button onClick={Login} type="submit">COmmencons</button>
+            <p>{token}</p>
+            </body>
         </div>
     );
 }
