@@ -1,11 +1,11 @@
 const express = require("express");
-const app = express();
+const server = express();
 const path = require('path');
 const spotify = require("spotify-web-api-node")
 
 
-app.use(express.json());
-app.use(express.static('Front/build'))
+server.use(express.json());
+server.use(express.static('Front/build'))
 
 
 
@@ -22,17 +22,17 @@ var spotifyweb = new spotify();
 
 spotifyweb.setCredentials({clientId:Client_ID,clientSecret: Secret, redirectUri: redirect});
 
-app.get("/first", (req,res)=>{
+server.get("/first", (req, res)=>{
 //sending the response to the front
 res.send({
   token: spotifyweb.getClientId()
 })
 })
 
-app.get('/*', (req, res)=>{
+server.get('/*', (req, res)=>{
   res.sendFile(path.join(__dirname, './Front/build/index.html'))
 })
   
 const PORT = process.env.PORT || 8888;
   
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+server.listen(PORT, console.log(`Server started on port ${PORT}`));

@@ -1,11 +1,11 @@
 {
   "name": "Muzik",
-  "main": "App.js",
+  "main": "Server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node App.js",
+    "start": "node Server.js",
     "test": "echo \"Error: no test specified",
-    "watch": "nodemon App.js",
+    "watch": "nodemon Server.js",
     "client": "cd Front && npm start",
     "install-client": "cd Front && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
