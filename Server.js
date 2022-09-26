@@ -18,14 +18,11 @@ const Secret = "381942fa91ea4627b34baa34c486800c";
 // The code that's returned as a query parameter to the redirect URI
 var code = 'MQCbtKe23z7YzzS44KzZzZgjQa621hgSzHN';
 
-var spotifyweb = new spotify();
-
-spotifyweb.setCredentials({clientId:Client_ID,clientSecret: Secret, redirectUri: redirect});
 
 server.get("/first", (req, res)=>{
 //sending the response to the front
 res.send({
-  token: spotifyweb.getClientId()
+  token:Client_ID)
 })
 })
 
