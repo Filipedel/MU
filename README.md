@@ -1,7 +1,7 @@
 # MU
 
 [![Heroku CI Status](https://intense-beach-03756.herokuapp.com/last.svg)](https://dashboard.heroku.com/pipelines/muzik/tests)
-![Coveralls](https://img.shields.io/coveralls/github/Filipedel/mu)
+![Coveralls](https://img.shields.io/coveralls/github.com/Filipedel/mu)
 ![Codacy coverage](https://img.shields.io/codacy/coverage/0c837d0)
 [![GitHub license](https://img.shields.io/github/license/Filipedel/MU)](https://github.com/Filipedel/MU/blob/main/License.md)
 [![GitHub issues](https://img.shields.io/github/issues/Filipedel/mu)](https://github.com/Filipedel/mu/issues)
