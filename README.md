@@ -9,8 +9,8 @@
 
 # Pour accéder au projet:
 
-## 1- Vous devez cloner le projet sur un dossier vide.
+### 1- Vous devez cloner le projet sur un dossier vide.
 
-## 2- Allez dans le dossier et lancer ```npm run build``` puis ``` npm run watch```
+### 2- Allez dans le dossier et lancer ```npm run build``` puis ``` npm run watch```
 
-## 3- Accèdez au lien http://localhost:8888/ 
+### 3- Accèdez au lien http://localhost:8888/ 
