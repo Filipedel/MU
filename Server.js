@@ -8,21 +8,37 @@ server.use(express.json());
 server.use(express.static('Front/build'))
 
 
-
-
 // Authentification Spotify API
-const Client_ID = "9f0488cb2b5948e09954ff6bbfaa3c54";
-const redirect = "http://localhost:8888";
-const Secret = "381942fa91ea4627b34baa34c486800c";
+const Client_ID = "f0ce212eee7f43a8a4ad290dea54919b";
 
-// The code that's returned as a query parameter to the redirect URI
-var code = 'MQCbtKe23z7YzzS44KzZzZgjQa621hgSzHN';
+const Secret = "6f42cdb3f7334b66955f1d5f6823b558";
+
+
+
+const spotifyApi = new  spotify({
+  clientId: Client_ID,
+  clientSecret: Secret
+})
+
+spotifyApi.clientCredentialsGrant().then(
+    function (data) {
+        console.log("The access token is " + data.body["access_token"])
+        spotifyApi.setAccessToken(data.body["access_token"])
+    },
+    function (err) {
+        console.log('Something went wrong!', err);
+    }
+    );
+
+
+
+
 
 
 server.get("/first", (req, res)=>{
 //sending the response to the front
 res.send({
-  token:Client_ID)
+    token: spotifyApi.getAccessToken()
 })
 })
 
