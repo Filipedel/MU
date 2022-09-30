@@ -12,6 +12,10 @@
   "index.html": "/index.html",
   "precache-manifest.56b13cf9b2f31e2884689ebf1f2b6d0a.js": "/precache-manifest.56b13cf9b2f31e2884689ebf1f2b6d0a.js",
   "service-worker.js": "/service-worker.js",
+<<<<<<< HEAD
   "static/css/2.b70f3d38.chunk.css.map": "/static/css/2.b70f3d38.chunk.css.map",
   "static/css/main.8bbe64d4.chunk.css.map": "/static/css/main.8bbe64d4.chunk.css.map"
+=======
+  "static/css/main.b9c195d7.chunk.css.map": "/static/css/main.b9c195d7.chunk.css.map"
+>>>>>>> d5dc3c9fd38089b5d6f9c3abc5cf2e1ec8c3f4ae
 }
