@@ -1,21 +1,17 @@
 {
-  "main.css": "/static/css/main.8bbe64d4.chunk.css",
-  "main.js": "/static/js/main.1ef6631f.chunk.js",
-  "main.js.map": "/static/js/main.1ef6631f.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.6592608c.js",
-  "runtime~main.js.map": "/static/js/runtime~main.6592608c.js.map",
-  "static/css/2.b70f3d38.chunk.css": "/static/css/2.b70f3d38.chunk.css",
-  "static/js/2.1a276ec8.chunk.js": "/static/js/2.1a276ec8.chunk.js",
-  "static/js/2.1a276ec8.chunk.js.map": "/static/js/2.1a276ec8.chunk.js.map",
-  "static/js/3.7bc68c7e.chunk.js": "/static/js/3.7bc68c7e.chunk.js",
-  "static/js/3.7bc68c7e.chunk.js.map": "/static/js/3.7bc68c7e.chunk.js.map",
+  "main.css": "/static/css/main.b9c195d7.chunk.css",
+  "main.js": "/static/js/main.de341176.chunk.js",
+  "main.js.map": "/static/js/main.de341176.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.f6f01fd4.js",
+  "runtime~main.js.map": "/static/js/runtime~main.f6f01fd4.js.map",
+  "static/css/2.6928152b.chunk.css": "/static/css/2.6928152b.chunk.css",
+  "static/js/2.6972b9e4.chunk.js": "/static/js/2.6972b9e4.chunk.js",
+  "static/js/2.6972b9e4.chunk.js.map": "/static/js/2.6972b9e4.chunk.js.map",
+  "static/js/3.16e4402c.chunk.js": "/static/js/3.16e4402c.chunk.js",
+  "static/js/3.16e4402c.chunk.js.map": "/static/js/3.16e4402c.chunk.js.map",
   "index.html": "/index.html",
-  "precache-manifest.56b13cf9b2f31e2884689ebf1f2b6d0a.js": "/precache-manifest.56b13cf9b2f31e2884689ebf1f2b6d0a.js",
+  "precache-manifest.56f1ae2f56be075625a1e7ae16cbe125.js": "/precache-manifest.56f1ae2f56be075625a1e7ae16cbe125.js",
   "service-worker.js": "/service-worker.js",
-<<<<<<< HEAD
-  "static/css/2.b70f3d38.chunk.css.map": "/static/css/2.b70f3d38.chunk.css.map",
-  "static/css/main.8bbe64d4.chunk.css.map": "/static/css/main.8bbe64d4.chunk.css.map"
-=======
+  "static/css/2.6928152b.chunk.css.map": "/static/css/2.6928152b.chunk.css.map",
   "static/css/main.b9c195d7.chunk.css.map": "/static/css/main.b9c195d7.chunk.css.map"
->>>>>>> d5dc3c9fd38089b5d6f9c3abc5cf2e1ec8c3f4ae
 }
