@@ -30,12 +30,7 @@ spotifyApi.clientCredentialsGrant().then(
     }
     );
 
-
-
-
-
-
-server.get("/first", (req, res)=>{
+server.get("/authentification", (req, res)=>{
 //sending the response to the front
 res.send({
     token: spotifyApi.getAccessToken()
