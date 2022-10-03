@@ -8,7 +8,6 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Filipedel/mu)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/Filipedel/mu)
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
-![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/mu)
 
 
 # Pour accéder au projet:
