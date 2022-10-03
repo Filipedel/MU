@@ -5,6 +5,10 @@
 ![Codacy coverage](https://img.shields.io/codacy/coverage/0c837d0)
 [![GitHub license](https://img.shields.io/github/license/Filipedel/MU)](https://github.com/Filipedel/MU/blob/main/License.md)
 [![GitHub issues](https://img.shields.io/github/issues/Filipedel/mu)](https://github.com/Filipedel/mu/issues)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Filipedel/mu)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/Filipedel/mu)
+![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/mu)
 
 
 # Pour accéder au projet:
