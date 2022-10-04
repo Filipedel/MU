@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import {Container, InputGroup, FormControl, Button, Row,Card} from 'react-bootstrap'
 import spotify from 'spotify-web-api-node'
 import "bootstrap/dist/css/bootstrap.min.css"
-
+import { useCookies } from "react-cookie";
 
 const playlist = () => {
 
@@ -10,7 +10,13 @@ const playlist = () => {
    const [Data, setData] = useState( {});
    const [user, setuserid] = useState("");
    var spotifyweb = new spotify();
+   const [cookies, setCookie] = useCookies(["userID"]);
 
+   function handleCookie() {
+    setCookie("userID", user, {
+      path: "/"
+    });
+  }
 
    const handleGetPlaylists = async() => {
        const data = await fetch('/authentification');
@@ -24,6 +30,7 @@ const playlist = () => {
            },function(err) {
                console.log('Something went wrong!', err);
            });
+           handleCookie();
    }
 
 
