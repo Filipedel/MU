@@ -11,15 +11,12 @@ const playlist = () => {
    const [user, setuserid] = useState("");
    var spotifyweb = new spotify();
 
-   const Logintoken = async () => {
-       const data = await fetch('/authentification');
-       const body = await data.json();
-       settoken(body.token);
-       console.log(token);
-   }
-    spotifyweb.setAccessToken(token)
 
-   const handleGetPlaylists = () => {
+   const handleGetPlaylists = async() => {
+       const data = await fetch('/authentification');
+       const body =  await data.json();
+       settoken(body.token);
+       spotifyweb.setAccessToken(token)
        spotifyweb.getUserPlaylists(user)
            .then(function(data) {
                console.log('Retrieved playlists', data.body);
@@ -34,7 +31,6 @@ const playlist = () => {
     return (
         <div className="App">
             <Container >
-            <Button onClick={Logintoken} type="submit">Let's Go</Button>
                 <InputGroup className={"mb-3"} size={"lg"}>
                     <FormControl placeholder={"Put your Spotify ID"} type={'input'}
                                  onChange={event => setuserid(event.target.value)}
@@ -50,12 +46,12 @@ const playlist = () => {
             </Container>
             <Container>
                 <Row className={"mx-2 row row-cols-4"}>
-                    {Data.items ? Data.items.map((item,i) =>{
-                        console.log(item)
+                    {Data.items ? Data.items.map((item) =>{
                         return (
                     <Card>
-                        <Card.Img src ={item.images[0].url}/>
+
                         <Card.Body>
+                            <Card.Img src ={item.images[0].url}/>
                             <Card.Title>{item.name}</Card.Title>
                         </Card.Body>
                     </Card>
