@@ -51,7 +51,9 @@ const playlist = () => {
                     <Card>
 
                         <Card.Body>
-                            <Card.Img src ={item.images[0].url}/>
+                            <Card.Img src={ (typeof item.images[0] != 'undefined') ? item.images[0].url :
+                               null
+                            }/>
                             <Card.Title>{item.name}</Card.Title>
                         </Card.Body>
                     </Card>
