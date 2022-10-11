@@ -6,9 +6,10 @@
 [![GitHub license](https://img.shields.io/github/license/Filipedel/MU)](https://github.com/Filipedel/MU/blob/main/License.md)
 [![GitHub issues](https://img.shields.io/github/issues/Filipedel/mu)](https://github.com/Filipedel/mu/issues)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Filipedel/mu)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/Filipedel/mu)
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
-
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](/)
+[![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](/)
+[![Build Status](https://travis-ci.org/Filipedel/travis-badge.svg?branch=master)](https://travis-ci.org/azu/travis-badge)
 
 # Pour accéder au projet:
 
