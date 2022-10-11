@@ -8,7 +8,7 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Filipedel/mu)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/Filipedel/mu)
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)(Releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](Releases)
 
 
 # Pour accéder au projet:
