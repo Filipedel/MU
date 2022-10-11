@@ -9,6 +9,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](.travis.yml)
 [![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](.travis.yml)
 [![Build Status](https://app.travis-ci.com/Filipedel/mu.svg?branch=main)](https://app.travis-ci.com/Filipedel/mu)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1f3ba4a638cb4413b44bc20ea7be2073)](https://www.codacy.com/gh/Filipedel/mu/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Filipedel/mu&amp;utm_campaign=Badge_Grade)
 
 
 # Prérequis:
