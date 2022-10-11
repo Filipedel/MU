@@ -1,6 +1,5 @@
-![mzk](https://user-images.githubusercontent.com/48649017/195068359-cd3aeeb8-a073-49d6-8006-efa4bd1b5206.png)
+# MU
 
-# MUZIK
 
 ![Coveralls](https://img.shields.io/coveralls/github/Filipedel/mu)
 ![Codacy coverage](https://img.shields.io/codacy/coverage/0c837d0)
@@ -9,8 +8,8 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Filipedel/mu)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/Filipedel/mu)
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](Releases)
-[![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)]
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](/)
+[![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](/)
 
 
 # Pour accéder au projet:
