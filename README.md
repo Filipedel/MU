@@ -8,7 +8,7 @@
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](/)
 [![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](/)
-![Travis (.com)](https://img.shields.io/travis/com/Filipedel/mu)
+[![Build Status](https://app.travis-ci.com/Filipedel/mu.svg?branch=main)](https://app.travis-ci.com/Filipedel/mu)
 
 
 # Prérequis:
