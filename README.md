@@ -11,6 +11,12 @@
 [![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](/)
 ![Travis (.com)](https://img.shields.io/travis/com/Filipedel/mu)
 
+
+#Prérequis:
+  - Une version à jour de Node.js
+
+
+
 # Pour accéder au projet:
 
 ### 1- Vous devez cloner le projet sur un dossier vide.
