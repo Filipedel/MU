@@ -1,5 +1,6 @@
-# MU
+![mzk](https://user-images.githubusercontent.com/48649017/195068359-cd3aeeb8-a073-49d6-8006-efa4bd1b5206.png)
 
+# MUZIK
 
 ![Coveralls](https://img.shields.io/coveralls/github/Filipedel/mu)
 ![Codacy coverage](https://img.shields.io/codacy/coverage/0c837d0)
