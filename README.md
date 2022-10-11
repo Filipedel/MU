@@ -9,7 +9,7 @@
 ![npms.io (final)](https://img.shields.io/npms-io/quality-score/mu)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Filipedel/mu)](/)
 [![Tag](https://img.shields.io/github/tag/Filipedel/mu.svg?label=tag&style=flat-square)](/)
-https://app.travis-ci.com/Filipedel/mu.svg?branch=main
+[![Build Status](https://travis-ci.org/azu/travis-badge.svg?branch=master)](https://travis-ci.org/azu/travis-badge)
 
 # Pour accéder au projet:
 
