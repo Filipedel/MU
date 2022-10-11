@@ -1,28 +1,42 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Container, InputGroup, FormControl, Button, Row,Card} from 'react-bootstrap'
 import spotify from 'spotify-web-api-node'
 import "bootstrap/dist/css/bootstrap.min.css"
-import { useCookies } from "react-cookie";
+import { useCookies, CookiesProvider } from "react-cookie";
+
+
+
+
 
 const playlist = () => {
 
    const [token, settoken] = useState("");
    const [Data, setData] = useState( {});
-   const [user, setuserid] = useState("");
-   var spotifyweb = new spotify();
+   var [user, setuserid] = useState("");
    const [cookies, setCookie] = useCookies(["userID"]);
 
+   //get token from the server
+    useEffect(async ()=> {
+        const APIServer = await fetch("/authentification")
+        const APiserverjson = await APIServer.json()
+        settoken(APiserverjson.token)
+    },[])
+
    function handleCookie() {
+    
     setCookie("userID", user, {
-      path: "/"
+      path: "/",
+      expires: "36000"
     });
+
   }
 
-   const handleGetPlaylists = async() => {
-       const data = await fetch('/authentification');
-       const body =  await data.json();
-       settoken(body.token);
-       spotifyweb.setAccessToken(token)
+
+  //Get playlist from spotify user
+    const spotifyweb = new spotify();
+   const handleGetPlaylists = () => {
+       spotifyweb.setAccessToken(token);
+       
        spotifyweb.getUserPlaylists(user)
            .then(function(data) {
                console.log('Retrieved playlists', data.body);
@@ -30,28 +44,32 @@ const playlist = () => {
            },function(err) {
                console.log('Something went wrong!', err);
            });
-           handleCookie();
    }
 
 
 
     return (
         <div className="App">
-            <Container >
-                <InputGroup className={"mb-3"} size={"lg"}>
-                    <FormControl placeholder={"Put your Spotify ID"} type={'input'}
-                                 onChange={event => setuserid(event.target.value)}
-                                 onKeyPress={event => {
-                                     if (event.key == "Enter") {
-                                         handleGetPlaylists();
-                                     }
-                                 }}
-                                 />
-                    <Button onClick={() => {handleGetPlaylists()}}>Search</Button>
-                </InputGroup>
-
-            </Container>
-            <Container>
+                
+                <Container>
+                    <InputGroup className={"mb-3"} size={"lg"}>
+                        <FormControl placeholder={"Put your Spotify ID"} type={'input'}
+                                     onChange={event => {setuserid(event.target.value)}}
+                                     onKeyPress={event => {
+                                         if (event.key == "Enter") {
+                                             handleGetPlaylists();
+                                             handleCookie();
+                                         }
+                                     }}
+                        />
+                        <Button onClick={() => {
+                            handleGetPlaylists();
+                            handleCookie();
+                        }}>Search</Button>
+                    </InputGroup>
+                    </Container>
+                   
+                <Container>
                 <Row className={"mx-2 row row-cols-4"}>
                     {Data.items ? Data.items.map((item) =>{
                         return (
@@ -62,6 +80,7 @@ const playlist = () => {
                                null
                             }/>
                             <Card.Title>{item.name}</Card.Title>
+                            <Card.Text></Card.Text>
                         </Card.Body>
                     </Card>
                     ) }): <Card>
@@ -72,6 +91,7 @@ const playlist = () => {
                 </Row>
 
             </Container>
+        
         </div>
     );
 }

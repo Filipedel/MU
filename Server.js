@@ -14,7 +14,7 @@ const Client_ID = "f0ce212eee7f43a8a4ad290dea54919b";
 const Secret = "6f42cdb3f7334b66955f1d5f6823b558";
 
 
-
+//GEt the token and send to the front
 const spotifyApi = new  spotify({
   clientId: Client_ID,
   clientSecret: Secret
@@ -30,6 +30,7 @@ spotifyApi.clientCredentialsGrant().then(
     }
     );
 
+//sending request
 server.get("/authentification", (req, res)=>{
 //sending the response to the front
 res.send({
