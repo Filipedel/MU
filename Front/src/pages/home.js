@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import React, { useState } from "react";
 import {
   Container,
@@ -24,7 +25,7 @@ const home = () => {
         <p>
           Afin de pouvoir utiliser les services de notre application, il est
           nécessaire que nous ayons accés à votre nom d'utilisateur afin
-          d'accéder aux données de votre compte{" "}
+          d'accéder aux données de votre compte spotify{" "}
         </p>
         <p>
           Vous devez tous d'abord cliquez sur le bouton ci-dessous, qui vous
