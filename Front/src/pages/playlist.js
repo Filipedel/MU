@@ -53,7 +53,7 @@ const playlist = () => {
                 
                 <Container>
                     <InputGroup className={"mb-3"} size={"lg"}>
-                        <FormControl placeholder={"Put your Spotify ID"} type={'input'}
+                        <FormControl placeholder={"Put your Spotify ID here"} type={'input'}
                                      onChange={event => {setuserid(event.target.value)}}
                                      onKeyPress={event => {
                                          if (event.key == "Enter") {
