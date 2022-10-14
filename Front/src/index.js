@@ -4,16 +4,16 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from "./App";
 import { BrowserRouter } from 'react-router-dom';
-import { CookiesProvider } from "react-cookie";
+import {CookiesProvider} from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <CookiesProvider>
     <BrowserRouter>
-    <CookiesProvider>
     <App/>
-    </CookiesProvider>
     </BrowserRouter>
+  </CookiesProvider>
   </React.StrictMode>
 );
 
