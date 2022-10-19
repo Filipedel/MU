@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 
 server.use(express.json());
-server.use(cookieParser());
+server.use(cookieParser("USER"));
 server.use(express.static('Front/build'));
 
 
@@ -33,13 +33,16 @@ spotifyApi.clientCredentialsGrant().then(
     }
     );
 
-//sending request
+//sending request playlist
 server.get("/token", (req, res)=>{
 //sending the response to the front
 res.send({
     token: spotifyApi.getAccessToken()
 })
 })
+
+
+
 
 //recieved user from front to put into cookie
 
@@ -48,13 +51,10 @@ server.post("/user",(req,res) => {
     if (! user){
         return res.status(400).send({status:'failed'});
     }
-    res.cookie("USERID", user.toString()).send("cookie set");
-})
-
-// clear cookie
-server.get("/clearcookie", (req,res) => {
-    res.clearCookie("USERID");
-
+    res.cookie("USERID", user.toString(),{
+        sameSite:"none",
+        secure: true
+    }).send("cookie set");
 })
 
 

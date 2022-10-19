@@ -1,13 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
-  InputGroup,
-  FormControl,
   Button,
   Row,
-  Card,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -38,7 +35,7 @@ const home = () => {
         Spotify
       </Button>
           <Link to="/playlist">
-            <Button variant="outlined">Playlist</Button>
+            <Button >Playlist</Button>
           </Link>
         </Row>
       </Container>
