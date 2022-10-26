@@ -28,8 +28,8 @@ spotifytoken.clientCredentialsGrant().then(
         console.log("The access token is " + data.body["access_token"])
         spotifytoken.setAccessToken(data.body["access_token"])
     },
-    function (errormachine) {
-        console.log('Something went wrong!',errormachine);
+    function (errormachine2) {
+        console.log('Something went wrong!',errormachine2);
     }
     );
 
