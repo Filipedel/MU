@@ -29,6 +29,8 @@ const playlist = () => {
         const APiserverjson = await APIServer.json();
         settoken(APiserverjson.token);
     },[])
+    //ii
+
 
 //Get playlist from spotify user
     const spotifyweb = new spotify();
@@ -62,13 +64,13 @@ const playlist = () => {
 
                         <Row><Image src={(typeof tracks.track.album.images[0] !== "undefined")? tracks.track.album.images[0].url: null} className={"image"}/> <strong>{artist.name}</strong>  Title: {tracks.track.name} </Row>)})}
                   </div>)
-            }):<div>Nothing!</div>)
+            }):null)
     }
 
 
    //send userid to back to put into cookies
-    const submituserback = async() => {
-        await fetch("/user",{
+    const submituserback = () => {
+         fetch("/user",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -78,7 +80,7 @@ const playlist = () => {
             })
         }).catch(err => {console.log(err)});
     }
-    function getCookie() {
+    function getCookie () {
         const name = "USERID=";
         const cDecoded = decodeURIComponent(document.cookie); //to be careful
         const cArr = cDecoded.split('; ');
@@ -94,33 +96,33 @@ const playlist = () => {
 
             <Container>
 
-                        {document.cookie.startsWith("USERID") ?
+                        {document.cookie.startsWith("USERID")?
                             //if cookie exist
                             <Button id="buttonplaylist" onClick={()=>{
                                 if(!open){
                                     setopen(true)
                                 document.getElementById("buttonplaylist").style.display="none"}
-                                handleGetPlaylists(getCookie())}}>See your playlists</Button>
+                                handleGetPlaylists(getCookie())}}>See your playlists yo</Button>
                             :
                             // no cookie
-                                <Container>
+
                                 <InputGroup className={"mb-3"} size={"lg"}>
                                     <FormControl placeholder={"Put your Spotify ID here"} type={'input'}
                                                  onChange={event => {
                                                      setuserid(event.target.value)
                                                  }}
-                                                 onKeyPress={  event => {
+                                                 onKeyPress={   (event) => {
                                                      if (event.key == "Enter") {
                                                           handleGetPlaylists(user);
                                                           submituserback();
                                                      }
                                                  }}/>
-                                    <Button onClick={ () => {
+                                    <Button onClick={  () => {
                                          handleGetPlaylists(user);
                                          submituserback();
                                     }}>Search</Button>
                                 </InputGroup>
-                                </Container>
+
                             }
 
                     <Row className={"mx-2 row row-cols-4" }>
@@ -134,7 +136,7 @@ const playlist = () => {
                         } />
                             <Card.Title>{item.name}</Card.Title>
 
-                            <Button  onClick={()=>{
+                            <Button  onClick={ ()=>{
                             setisOpen(true);
                             handleitemsplaylists(item.id);
                         }
@@ -147,10 +149,10 @@ const playlist = () => {
                     </Row>
                     {isOpen && <Popup handleClose={()=>{
                         setisOpen(false)
-                    }} content={showtracks()}/>}
-
+                    }} content={ showtracks()} />}
 
             </Container>
+
         );
 
 }

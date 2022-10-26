@@ -18,18 +18,18 @@ server.use(express.static('Front/build'));
 
 const Secret = process.env.Secret
 const Client = process.env.ClientID
-const spotifyApi = new  spotify({
+const spotifytoken = new  spotify({
   clientId: Client,
   clientSecret: Secret
 })
 
-spotifyApi.clientCredentialsGrant().then(
+spotifytoken.clientCredentialsGrant().then(
     function (data) {
         console.log("The access token is " + data.body["access_token"])
-        spotifyApi.setAccessToken(data.body["access_token"])
+        spotifytoken.setAccessToken(data.body["access_token"])
     },
-    function (err) {
-        console.log('Something went wrong!', err);
+    function (error) {
+        console.log('Something went wrong!',error);
     }
     );
 
@@ -37,7 +37,7 @@ spotifyApi.clientCredentialsGrant().then(
 server.get("/token", (req, res)=>{
 //sending the response to the front
 res.send({
-    token: spotifyApi.getAccessToken()
+    token: spotifytoken.getAccessToken()
 })
 })
 
