@@ -4,6 +4,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node Server.js",
+    "test": " Error: no test specified",
     "watch": "nodemon Server.js",
     "client": "cd Front && npm start",
     "install-client": "cd Front && npm install",
