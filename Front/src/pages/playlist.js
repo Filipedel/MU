@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Container, InputGroup, FormControl, Button, Row, Card, Image, CardImg} from 'react-bootstrap'
-import spotify from 'spotify-web-api-node'
+import React, {useState} from "react";
+import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Popup from "../popup/popup";
 import "./Image.css"
@@ -14,7 +13,6 @@ const playlist = () => {
 
    var [Data, setData] = useState( {});
    var [user, setuserid] = useState("");
-   var [token, settoken] = useState('');
    var [Datatracks,setdataitems]= useState( {});
    //popup
    const[isOpen, setisOpen]=useState(false);
@@ -22,39 +20,18 @@ const playlist = () => {
     const [open,setopen]=useState(false)
 
 
-
-   //get token from the server
-    useEffect(async ()=> {
-        const APIServer = await fetch("/token");
-        const APiserverjson = await APIServer.json();
-        settoken(APiserverjson.token);
-    },[])
-    //ii
-
-
-//Get playlist from spotify user
-    const spotifyweb = new spotify();
-    spotifyweb.setAccessToken(token);
-
-   const handleGetPlaylists =  (name) => {
-          spotifyweb.getUserPlaylists(name)
-           .then(function(data) {
-               console.log('Retrieved playlists', data.body);
-               setData(data.body)
-           },function(err) {
-               console.log('Something went wrong!', err);
-           });
-   }
+    const handleplaylist = () => {
+        fetch("getplaylist").then(response => response.json()).then(d => {setData(d.Dataplaylist)})
+                .catch(err => console.log(err));
+    }
 
    //DISPLAY all Items from a playlist
-    const handleitemsplaylists = (id) =>  {
-        spotifyweb.getPlaylistTracks(id).then(function (data){
-            console.log('Retrieved items', data.body);
-            setdataitems(data.body);
-        },function (err){
-            console.log('Something went wrong!', err);
-        })
+    const handleitemsplaylists = () =>  {
+       fetch("getplaylistitems").then(response => response.json()).then(d=> {setdataitems(d.body)})
+           .catch(err => console.log(err));
     }
+
+
     function showtracks(){
        ///!!!Popup
         return(
@@ -80,15 +57,17 @@ const playlist = () => {
             })
         }).catch(err => {console.log(err)});
     }
-    function getCookie () {
-        const name = "USERID=";
-        const cDecoded = decodeURIComponent(document.cookie); //to be careful
-        const cArr = cDecoded.split('; ');
-        let res;
-        cArr.forEach(val => {
-            if (val.indexOf(name) === 0) res = val.substring(name.length);
-        })
-        return res;
+    //send itemid to back to return playlist items
+    const submitidback = (id) => {
+        fetch("/id",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        }).catch(err => {console.log(err)});
     }
 
 
@@ -102,7 +81,7 @@ const playlist = () => {
                                 if(!open){
                                     setopen(true)
                                 document.getElementById("buttonplaylist").style.display="none"}
-                                handleGetPlaylists(getCookie())}}>See your playlists yo</Button>
+                                handleplaylist();}}>See your playlists</Button>
                             :
                             // no cookie
 
@@ -112,25 +91,25 @@ const playlist = () => {
                                                      setuserid(event.target.value)
                                                  }}
                                                  onKeyPress={   (event) => {
-                                                     if (event.key == "Enter") {
-                                                          handleGetPlaylists(user);
+                                                     if (event.key === "Enter") {
                                                           submituserback();
+                                                          handleplaylist()
                                                      }
                                                  }}/>
                                     <Button onClick={  () => {
-                                         handleGetPlaylists(user);
                                          submituserback();
+                                         handleplaylist();
                                     }}>Search</Button>
                                 </InputGroup>
 
                             }
-
-                    <Row className={"mx-2 row row-cols-4" }>
+                {open === true?
+                    <Row className={"mx-2 row row-cols-4" } >
 
                         {Data.items  ? Data.items.map( (item) => {
                             return(
 
-                            <Card>
+                            <Card >
                             <Card.Img src={(typeof item.images[0] !== 'undefined') ? item.images[0].url :
                             null
                         } />
@@ -138,7 +117,8 @@ const playlist = () => {
 
                             <Button  onClick={ ()=>{
                             setisOpen(true);
-                            handleitemsplaylists(item.id);
+                            submitidback(item.id);
+                            handleitemsplaylists()
                         }
                         }> See tracks</Button>
 
@@ -146,7 +126,7 @@ const playlist = () => {
 
                         }) : null }
 
-                    </Row>
+                    </Row>:null}
                     {isOpen && <Popup handleClose={()=>{
                         setisOpen(false)
                     }} content={ showtracks()} />}

@@ -10,11 +10,12 @@ server.use(express.json());
 server.use(cookieParser("USER"));
 server.use(express.static('Front/build'));
 
+///PLAYLIST PAGE
 
+// form who cames from front
+let User ;
+let itemid;
 
-
-
-//GEt the token and send to the front
 
 const Secret = process.env.Secret
 const Client = process.env.ClientID
@@ -33,17 +34,6 @@ spotifytoken.clientCredentialsGrant().then(
     }
     );
 
-//sending request playlist
-server.get("/token", (req, res)=>{
-//sending the response to the front
-res.send({
-    token: spotifytoken.getAccessToken()
-})
-})
-
-
-
-
 //recieved user from front to put into cookie
 
 server.post("/user",(req,res) => {
@@ -55,7 +45,49 @@ server.post("/user",(req,res) => {
         sameSite:"none",
         secure: true
     }).send("cookie set");
+    User = user;
+
 })
+
+//sending request playlist
+server.get("/getplaylist", (req, res)=>{
+    spotifytoken.getUserPlaylists(User)
+        .then(function(data) {
+            console.log('Retrieved playlists', data.body);
+            res.send({
+                Dataplaylist: data.body
+            });
+        },function(err) {
+            console.log('Something went wrong!', err);
+        });
+
+})
+//recieved id from front to get playlist items
+
+server.post("/id",(req,res) => {
+    const { id } = req.body;
+    if (! id){
+        return res.status(400).send({status:'failed'});
+    }
+    itemid = id;
+    console.log(itemid)
+
+})
+//sending request playlistitems
+server.get("/getplaylistitems", (req, res)=>{
+    spotifytoken.getPlaylistTracks(itemid).then(function (data){
+        console.log('Retrieved items', data.body);
+        res.send({
+            body: data.body
+        })
+    },function (err){
+        console.log('Something went wrong!', err);
+    })
+
+})
+
+
+
 
 
 
