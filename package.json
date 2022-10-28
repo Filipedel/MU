@@ -2,9 +2,6 @@
   "name": "Muzik",
   "main": "Server.js",
   "type": "commonjs",
-  "jest": {
-    "verbose": true
-  },
   "scripts": {
     "start": "node Server.js",
     "test": "mocha",
