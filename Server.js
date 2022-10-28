@@ -3,7 +3,9 @@ const server = express();
 const path = require('path');
 const spotify = require("spotify-web-api-node")
 const cookieParser = require('cookie-parser');
+const request = require("supertest");
  require("dotenv").config();
+
 
 
 server.use(express.json());
@@ -94,7 +96,12 @@ server.get("/getplaylistitems", (req, res)=>{
 server.get('/*', (req, res)=>{
   res.sendFile(path.join(__dirname, './Front/build/index.html'))
 })
-  
+
 const PORT = process.env.PORT || 8888;
   
 server.listen(PORT, console.log(`Server started on port ${PORT}`));
+
+
+
+
+module.exports = server;
