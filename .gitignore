@@ -108,8 +108,8 @@ dist
 # folder
 build/ 
 */build/
-# node_modules
-# Front/node_modules
+node_modules
+Front/node_modules
 
 #api Keys
 .env
