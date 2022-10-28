@@ -4,7 +4,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node Server.js",
-    "test": "mocha",
+    "test": "jest",
     "watch": "nodemon Server.js",
     "client": "cd Front && npm start",
     "install-client": "cd Front && npm install",

@@ -4,16 +4,20 @@ import React from "react";
 import {
   Container,
   Button,
-  Row,
+  Row, Image,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+
+//Open url spotify
 const openInNewTab = url => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
 const home = () => {
   return (
+
+
     <div className="App">
       <Container>
         <Row className={"mx-2 row row-cols-12"}>
