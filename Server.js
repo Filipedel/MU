@@ -1,40 +1,78 @@
-const express = require("express");
+
+import express from "express";
+
+import path from "path";
+import spotify from "spotify-web-api-node";
+import cookieParser from "cookie-parser";
+import _ from 'lodash';
+import alert from "alert";
+import * as dotenv from 'dotenv'
+
+import {wait} from "@testing-library/user-event/dist/utils/index.js";
+ dotenv.config()
+
+
 const server = express();
-const path = require('path');
-const spotify = require("spotify-web-api-node")
-const cookieParser = require('cookie-parser');
-const request = require("supertest");
- require("dotenv").config();
-
-
 
 server.use(express.json());
 server.use(cookieParser("USER"));
 server.use(express.static('Front/build'));
 
-///PLAYLIST PAGE
+///PLAYLIST and Home PAGE
 
 // form who cames from front
 let User ;
 let itemid;
 
 
+//time refresh token variable
+
 const Secret = process.env.Secret
 const Client = process.env.ClientID
+
+
 const spotifytoken = new  spotify({
   clientId: Client,
-  clientSecret: Secret
+  clientSecret: Secret,
 })
 
-spotifytoken.clientCredentialsGrant().then(
-    function (data) {
-        console.log("The access token is " + data.body["access_token"])
-        spotifytoken.setAccessToken(data.body["access_token"])
+//scrapping
+
+//arriere plan un site  web  et on recupere le code qui est dans l'url
+
+
+
+const  TokenRefresh = ()=>{
+    spotifytoken.clientCredentialsGrant().then(
+    function(data) {
+        console.log('The access token expires in ' + data.body['expires_in']);
+        console.log('The access token is ' + data.body['access_token']);
+
+        // Save the access token so that it's used in future calls
+        spotifytoken.setAccessToken(data.body['access_token']);
     },
-    function (errormachine2) {
-        console.log('Something went wrong!',errormachine2);
+    function(err) {
+        console.log('Something went wrong when retrieving an access token', err);
     }
-    );
+)};
+
+
+
+//Beginning
+setTimeout(()=>{TokenRefresh()},0);
+//loop infinitely
+setTimeout(()=>{TokenRefresh();
+    alert("Rafraichir")},3.61e+6);
+
+
+server.get("/search",(req,res)=>{
+    spotifytoken.searchTracks('Love')
+        .then(function(data) {
+            console.log('Search by "Love"', data.body);
+            res.send(data.body);
+        }, function(err) {
+            console.error(err);
+        });})
 
 //recieved user from front to put into cookie
 
@@ -51,7 +89,8 @@ server.post("/user",(req,res) => {
 
 })
 
-//sending request playlist
+
+//sending request playlist and user
 server.get("/getplaylist", (req, res)=>{
     spotifytoken.getUserPlaylists(User)
         .then(function(data) {
@@ -62,7 +101,18 @@ server.get("/getplaylist", (req, res)=>{
         },function(err) {
             console.log('Something went wrong!', err);
         });
+})
 
+server.get("/getUser",(req,res)=>{
+    spotifytoken.getUser(User)
+        .then(function(data) {
+            console.log('Retrieved UserStory', data.body);
+            res.send({
+                DataUser: data.body
+            });
+        },function(err) {
+            console.log('Something went wrong!', err);
+        });
 })
 //recieved id from front to get playlist items
 
@@ -92,10 +142,11 @@ server.get("/getplaylistitems", (req, res)=>{
 
 
 
+server.get("/*", (req, res)=>{
+    res.sendFile(path.join(__dirname, './Front/build/index.html'))
 
-server.get('/*', (req, res)=>{
-  res.sendFile(path.join(__dirname, './Front/build/index.html'))
 })
+
 
 const PORT = process.env.PORT || 8888;
   
@@ -104,4 +155,4 @@ server.listen(PORT, console.log(`Server started on port ${PORT}`));
 
 
 
-module.exports = server;
+export  default server;

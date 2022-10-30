@@ -9,6 +9,10 @@
   overflow: hidden;
   padding: 0px;
 }
+.image{
+  width: 60px;
+  height: 60px;
+}
 
 .particlesheader{
   margin-top: 350px;

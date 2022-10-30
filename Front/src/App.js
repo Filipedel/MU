@@ -13,16 +13,6 @@ import ParticleBackground from "./Component/ParticleBackground";
                 <div>
                     <a href={"/"}><img src={image} alt="image" width="100" height={"60"}></img></a>
                     <Main/>
-                    <CookieConsent debug={true}
-                                   location="bottom"
-                                   style={{background: "#003", textAlign: "left"}}
-                                   buttonStyle={{color: "#000", background: "#fff", fontStyle: "14px"}}
-                                   buttonText={"Accept"}
-                                   declineButtonText={"Refuse"}
-                                   expires={365} hideOnAccept={
-                                       true} hideOnDecline={true}>
-                        This site uses cookies. See our <a href={"/privacy"}>privacy policy</a> for more
-                        information</CookieConsent>
                 </div>
 
             </div>);

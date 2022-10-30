@@ -10,26 +10,32 @@ import "./Image.css"
 
 
 const playlist = () => {
+    //data playlist
+   const [Data, setData] = useState( {});
 
-   var [Data, setData] = useState( {});
-   var [user, setuserid] = useState("");
-   var [Datatracks,setdataitems]= useState( {});
+   //data tracks playlist
+   const [Datatracks,setdataitems]= useState( {});
+
+   //data user
+    const [user, setuserid] = useState("");
    //popup
    const[isOpen, setisOpen]=useState(false);
    //see playlist (cookie)
     const [open,setopen]=useState(false)
 
 
-    const handleplaylist = () => {
-        fetch("getplaylist").then(response => response.json()).then(d => {setData(d.Dataplaylist)})
+    const handlePlaylist = () => {
+        fetch("/getplaylist").then(response => response.json()).then(d => {setData(d.Dataplaylist)})
                 .catch(err => console.log(err));
     }
 
    //DISPLAY all Items from a playlist
     const handleitemsplaylists = () =>  {
-       fetch("getplaylistitems").then(response => response.json()).then(d=> {setdataitems(d.body)})
+       fetch("/getplaylistitems").then(response => response.json()).then(d=> {setdataitems(d.body)})
            .catch(err => console.log(err));
     }
+
+
 
 
     function showtracks(){
@@ -81,7 +87,7 @@ const playlist = () => {
                                 if(!open){
                                     setopen(true)
                                 document.getElementById("buttonplaylist").style.display="none"}
-                                handleplaylist();}}>See your playlists</Button>
+                                handlePlaylist();}}>See your playlists</Button>
                             :
                             // no cookie
 
@@ -93,17 +99,18 @@ const playlist = () => {
                                                  onKeyPress={   (event) => {
                                                      if (event.key === "Enter") {
                                                           submituserback();
-                                                          handleplaylist()
+                                                          handlePlaylist()
                                                      }
                                                  }}/>
                                     <Button onClick={  () => {
                                          submituserback();
-                                         handleplaylist();
+                                         handlePlaylist();
                                     }}>Search</Button>
                                 </InputGroup>
 
                             }
-                {open === true?
+
+                {open === true ?
                     <Row className={"mx-2 row row-cols-4" } >
 
                         {Data.items  ? Data.items.map( (item) => {
@@ -127,6 +134,8 @@ const playlist = () => {
                         }) : null }
 
                     </Row>:null}
+
+
                     {isOpen && <Popup handleClose={()=>{
                         setisOpen(false)
                     }} content={ showtracks()} />}

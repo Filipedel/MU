@@ -1,7 +1,8 @@
 
 
-const expect  = require('chai').expect;
-const request = require('request');
+
+import {expect} from "chai";
+import request from "request";
 
 
 describe("Get '/*'", function (){

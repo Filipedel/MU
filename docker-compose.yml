@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+      "Server.js"
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    image: "dmurphy1217/twitter-sentiment-backend"
+    ports:
+      - "5000:5000"
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    image: "dmurphy1217/twitter-sentiment-frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - "backend:be"
