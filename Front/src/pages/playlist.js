@@ -25,13 +25,13 @@ const playlist = () => {
 
 
     const handlePlaylist = () => {
-        fetch("/getplaylist").then(response => response.json()).then(d => {setData(d.Dataplaylist)})
+        fetch("/playlist").then(response => response.json()).then(d => {setData(d.Dataplaylist)})
                 .catch(err => console.log(err));
     }
 
    //DISPLAY all Items from a playlist
     const handleitemsplaylists = () =>  {
-       fetch("/getplaylistitems").then(response => response.json()).then(d=> {setdataitems(d.body)})
+       fetch("/playlistitems").then(response => response.json()).then(d=> {setdataitems(d.body)})
            .catch(err => console.log(err));
     }
 
@@ -53,7 +53,7 @@ const playlist = () => {
 
    //send userid to back to put into cookies
     const submituserback = () => {
-         fetch("/user",{
+         fetch("/playlist",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -65,7 +65,7 @@ const playlist = () => {
     }
     //send itemid to back to return playlist items
     const submitidback = (id) => {
-        fetch("/id",{
+        fetch("/playlist/id",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

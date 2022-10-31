@@ -21,7 +21,7 @@ const home = () => {
   const  [dataUser, setDataUser] = useState({});
   const handleGetUser = ()=> {
       useEffect(()=> {
-                fetch("/getUser")
+                fetch("/home")
               .then(response => response.json())
               .then(d => setDataUser(d.DataUser))
               .catch(err => console.log(err));

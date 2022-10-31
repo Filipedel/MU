@@ -36,12 +36,6 @@ const spotifytoken = new  spotify({
   clientSecret: Secret,
 })
 
-//scrapping
-
-//arriere plan un site  web  et on recupere le code qui est dans l'url
-
-
-
 const  TokenRefresh = ()=>{
     spotifytoken.clientCredentialsGrant().then(
     function(data) {
@@ -61,7 +55,7 @@ const  TokenRefresh = ()=>{
 //Beginning
 setTimeout(()=>{TokenRefresh()},0);
 //loop infinitely
-setTimeout(()=>{TokenRefresh();
+setInterval(()=>{TokenRefresh();
     alert("Rafraichir")},3.61e+6);
 
 
@@ -76,7 +70,7 @@ server.get("/search",(req,res)=>{
 
 //recieved user from front to put into cookie
 
-server.post("/user",(req,res) => {
+server.post("/playlist",(req,res) => {
     const { user } = req.body;
     if (! user){
         return res.status(400).send({status:'failed'});
@@ -91,7 +85,7 @@ server.post("/user",(req,res) => {
 
 
 //sending request playlist and user
-server.get("/getplaylist", (req, res)=>{
+server.get("/playlist", (req, res)=>{
     spotifytoken.getUserPlaylists(User)
         .then(function(data) {
             console.log('Retrieved playlists', data.body);
@@ -103,7 +97,7 @@ server.get("/getplaylist", (req, res)=>{
         });
 })
 
-server.get("/getUser",(req,res)=>{
+server.get("/home",(req,res)=>{
     spotifytoken.getUser(User)
         .then(function(data) {
             console.log('Retrieved UserStory', data.body);
@@ -116,7 +110,7 @@ server.get("/getUser",(req,res)=>{
 })
 //recieved id from front to get playlist items
 
-server.post("/id",(req,res) => {
+server.post("/playlist/id",(req,res) => {
     const { id } = req.body;
     if (! id){
         return res.status(400).send({status:'failed'});
@@ -126,7 +120,7 @@ server.post("/id",(req,res) => {
 
 })
 //sending request playlistitems
-server.get("/getplaylistitems", (req, res)=>{
+server.get("/playlistitems", (req, res)=>{
     spotifytoken.getPlaylistTracks(itemid).then(function (data){
         console.log('Retrieved items', data.body);
         res.send({

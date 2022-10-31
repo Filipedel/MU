@@ -17,6 +17,8 @@ COPY package.json ./
 RUN npm install
 
 COPY Server.js ./
+ 
+
 
 EXPOSE 8888
 
