@@ -81,7 +81,7 @@ const playlist = () => {
 
             <Container>
 
-                        {document.cookie.startsWith("USERID")?
+                        {document.cookie.indexOf("USERID=") !== -1?
                             //if cookie exist
                             <Button id="buttonplaylist" onClick={()=>{
                                 if(!open){

@@ -33,7 +33,7 @@ const home = () => {
 
     <div>
 
-        {document.cookie.startsWith("USERID=") ?
+        {document.cookie.indexOf("USERID=") !== -1 ?
             <Container>
         <div onLoad={handleGetUser()}>
             <Image src={(typeof dataUser.images !== "undefined") ? dataUser["images"].map((item) => {
