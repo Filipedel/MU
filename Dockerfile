@@ -1,11 +1,3 @@
-FROM node:16 AS CLient-build
-
-WORKDIR /Users/FILIPE/Desktop/MUZ/Front
-COPY package.json ./
-RUN npm install
-COPY src/ ./src
-COPY public/ ./public
-RUN npm run build
 
 From node:16 AS server-build
 
