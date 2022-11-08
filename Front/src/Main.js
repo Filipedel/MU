@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/home';
-import Playlist from './pages/playlist';
-
+import Home from './Component/Home/home';
+import Playlist from './Component/Playlist/playlist';
+import Tracks from "./Component/Playlist/Tracks/Tracks";
 
 const Main = () => {
   return (
     <Routes> 
       <Route path='/' element={<Home/>} />
       <Route path='/playlist' element={<Playlist/>} />
-
+        <Route path={"/playlist/Tracks"} element={<Tracks/>}/>
     </Routes>
   );
 }

@@ -2,13 +2,14 @@
 import express from "express";
 
 import path from "path";
+const __dirname = path.resolve()
+
 import spotify from "spotify-web-api-node";
 import cookieParser from "cookie-parser";
 import _ from 'lodash';
 import alert from "alert";
 import * as dotenv from 'dotenv'
 
-import {wait} from "@testing-library/user-event/dist/utils/index.js";
  dotenv.config()
 
 
@@ -124,7 +125,7 @@ server.get("/playlistitems", (req, res)=>{
     spotifytoken.getPlaylistTracks(itemid).then(function (data){
         console.log('Retrieved items', data.body);
         res.send({
-            body: data.body
+            Playlistitems: data.body
         })
     },function (err){
         console.log('Something went wrong!', err);

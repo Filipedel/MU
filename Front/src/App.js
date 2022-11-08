@@ -3,14 +3,14 @@ import Main from "./Main";
 import image from './Muzik.jpeg'
 import CookieConsent from "react-cookie-consent"
 import "./App.css"
-import ParticleBackground from "./Component/ParticleBackground";
+import ParticleBackground from "./Component/BackgroundView/ParticleBackground";
 
     const App = () => {
 
         return (
             <div className={"particlesheader"}>
                 <ParticleBackground/>
-                <div>
+                <div className={"multicolortext"}>
                     <a href={"/"}><img src={image} alt="image" width="100" height={"60"}></img></a>
                     <Main/>
                 </div>
