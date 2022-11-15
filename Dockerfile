@@ -1,15 +1,20 @@
+FROM node:16 
 
-From node:16 AS server-build
+WORKDIR /usr/src/app
 
-WORKDIR /Users/FILIPE/Desktop/MUZ
-COPY --from=CLient-build /Users/FILIPE/Desktop/MUZ/Front/build/ ./Front/build
-WORKDIR /Users/FILIPE/Desktop/MUZ/
 
-COPY package.json ./
-RUN npm install
+RUN npm install react-router-dom
+RUN npm install react-cookie-consent
+RUN npm install react-cookie
+RUN npm install react-tsparticles
+RUN cd ..
+RUN npm install nodemon
+RUN npm install express
 
-COPY Server.js ./
- 
+
+COPY . .
+
+RUN npm run build
 
 
 EXPOSE 8888

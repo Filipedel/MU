@@ -110,6 +110,3 @@ build/
 */build/
 node_modules
 Front/node_modules
-
-#api Keys
-.env
