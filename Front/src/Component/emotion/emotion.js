@@ -5,7 +5,6 @@ import "../Home/Image.css"
 import {submitEmotion,handleEmotion} from "../../Services/SpotifyApi";
 
 const emotion = () =>{
-
     // not working until data are fetched
     const [open,setopen]=useState(false);
      // not working until data are fetched
@@ -14,9 +13,8 @@ const emotion = () =>{
     const [Playlist,setPlaylist]= useState({});
 
 
-
     const GetPlaylist = ()=>{
-        handleEmotion().then(getData=>setPlaylist(getData))
+        handleEmotion().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
 
@@ -43,16 +41,20 @@ const emotion = () =>{
     <Row className={"mx-2 row row-cols-4" } >
 
         {Playlist.items  ? Playlist.items.map( (Playlist) => {
+
+
+
             return(
 
                 <Card >
-                    <Card.Img src={(typeof Playlist.images[0] !== 'undefined') ? Playlist.images[0].url :
+                    <Card.Img src={(typeof Playlist.album.images[0] !== 'undefined') ? Playlist.album.images[0].url :
                         null
                     } />
-                    <Card.Title>{Playlist.name}</Card.Title>
+                    <Card.Title>{Playlist.album.name} </Card.Title>
+                    <Card.Text>ArtistName:{Playlist.artists[0].name}, Popularity:{Playlist.popularity}</Card.Text>
                 </Card>)
 
-        }) : console.log(Playlist) }
+        }) : null}
 
     </Row>:null}
 </Container>

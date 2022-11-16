@@ -22,7 +22,8 @@ const handleitemsplaylists = async () =>  {
 const handleEmotion = async () => {
     const PromiseUserEmotion = await fetch("/emotion");
     const UserEmotionResponse = await PromiseUserEmotion.json();
-    const GetUserEmotion = UserEmotionResponse.DataEmotion;
+    const GetUserEmotion = UserEmotionResponse.DataEmotion.tracks;
+    console.log(GetUserEmotion);
     return GetUserEmotion;
 }
 
