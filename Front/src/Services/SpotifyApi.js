@@ -19,6 +19,13 @@ const handleitemsplaylists = async () =>  {
 
 }
 
+const handleEmotion = async () => {
+    const PromiseUserEmotion = await fetch("/emotion");
+    const UserEmotionResponse = await PromiseUserEmotion.json();
+    const GetUserEmotion = UserEmotionResponse.DataEmotion;
+    return GetUserEmotion;
+}
+
 //send userid to back to put into cookies
 const submituserback = async (user) => {
     await fetch("/playlist",{
@@ -43,12 +50,25 @@ const submitidback = async (id) => {
         })
     }).catch(err => {console.log(err)});
 }
-
+// send Emotion choice to server
+const submitEmotion = async (emo) => {
+    await fetch("/search",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emo: emo
+        })
+    }).catch(err => {console.log(err)});
+}
 
 
 export {
     handlePlaylist,
+    handleEmotion,
     submituserback,
     submitidback,
+    submitEmotion,
     handleitemsplaylists
 }

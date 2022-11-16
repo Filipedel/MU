@@ -46,6 +46,9 @@ const home = () => {
             <Link to="/playlist">
                 <Button >Playlist</Button>
             </Link>
+            <Link to="/emotion">
+          <Button>Emotion</Button>
+          </Link>
             </Container>:
             <Container>
             <Row className={"mx-2 row row-cols-12"}>
@@ -68,6 +71,9 @@ const home = () => {
           </Button>
           <Link to="/playlist">
           <Button >Playlist</Button>
+          </Link>
+          <Link to="/emotion">
+          <Button>Emotion</Button>
           </Link>
           </Row>
             </Container>

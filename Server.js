@@ -23,6 +23,7 @@ server.use(express.static('Front/build'));
 
 // form who cames from front
 let User ;
+let Emotion;
 let itemid;
 
 
@@ -59,15 +60,27 @@ setTimeout(()=>{TokenRefresh()},0);
 setInterval(()=>{TokenRefresh();
     alert("Rafraichir")},3.61e+6);
 
+// receive emotion from front
+server.post("/search",(req,res)=>{
+    const { emo } = req.body;
+    if (! emo){
+        return res.status(400).send({status:'failed'});
+    }
+  Emotion = emo;   
+    })
 
-server.get("/search",(req,res)=>{
-    spotifytoken.searchTracks('Love')
-        .then(function(data) {
-            console.log('Search by "Love"', data.body);
-            res.send(data.body);
-        }, function(err) {
-            console.error(err);
-        });})
+//sending Tracks matching emotion
+server.get("/emotion", (req, res)=>{
+    spotifytoken.searchTracks(Emotion)
+         .then(function(data) {
+             console.log('Search by '+Emotion, data.body);
+             res.send({
+                DataEmotion: data.body
+             });
+         }, function(err) {
+             console.error(err);
+         });
+})
 
 //recieved user from front to put into cookie
 
