@@ -75,6 +75,9 @@ const home = () => {
           <Link to="/emotion">
           <Button>Emotion</Button>
           </Link>
+          <Link to="/sonjour">
+          <Button>Musique du Jour</Button>
+          </Link>
           </Row>
             </Container>
         }

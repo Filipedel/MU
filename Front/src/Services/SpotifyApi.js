@@ -27,6 +27,13 @@ const handleEmotion = async () => {
     return GetUserEmotion;
 }
 
+const handleSonJour = async () => {
+    const PromiseUserSon = await fetch("/jour");
+    const UserSonResponse = await PromiseUserSon.json();
+    const GetUserSon = UserSonResponse.DataJour;
+    return GetUserSon;
+}
+
 //send userid to back to put into cookies
 const submituserback = async (user) => {
     await fetch("/playlist",{
@@ -68,6 +75,7 @@ const submitEmotion = async (emo) => {
 export {
     handlePlaylist,
     handleEmotion,
+    handleSonJour,
     submituserback,
     submitidback,
     submitEmotion,
