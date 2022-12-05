@@ -38,6 +38,7 @@ const spotifytoken = new  spotify({
   clientSecret: Secret,
 })
 
+
 const  TokenRefresh = ()=>{
     spotifytoken.clientCredentialsGrant().then(
     function(data) {
@@ -79,6 +80,17 @@ server.get("/emotion", (req, res)=>{
              console.error(err);
          });
 })
+// get new releases
+server.get("/release",(req,res)=>{
+    spotifytoken.getNewReleases({ limit : 20, offset: 0, country: 'FR' })
+  .then(function(data) {
+      res.send({
+        DataRelease: data.body
+      })
+    }, function(err) {
+       console.log("Something went wrong!", err);
+    });
+  });
 
 //recieved user from front to put into cookie
 

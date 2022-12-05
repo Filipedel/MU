@@ -34,6 +34,13 @@ const handleSonJour = async () => {
     return GetUserSon;
 }
 
+const handleRelease = async () => {
+    const PromiseUserRel = await fetch("/release");
+    const UserRelResponse = await PromiseUserRel.json();
+    const GetUserRel = UserRelResponse.DataRelease.albums;
+    return GetUserRel;
+}
+
 //send userid to back to put into cookies
 const submituserback = async (user) => {
     await fetch("/playlist",{
@@ -79,5 +86,6 @@ export {
     submituserback,
     submitidback,
     submitEmotion,
+    handleRelease,
     handleitemsplaylists
 }
