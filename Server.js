@@ -140,6 +140,7 @@ server.get("/jour", (req, res)=>{
                 if(tab.length > 1){
                     tab.splice(0,tab.length - 1);
                 }
+                console.log(tab);
                   res.send({
                       DataJour: tab[0]
                   });

@@ -13,8 +13,8 @@ const SonJour = () => {
      const [valid,setvalid]=useState(false);
 
 
-    const GetPlaylist = ()=>{
-        handleSonJour().then(function(MusicSearch){console.log(MusicSearch);setPlaylist(MusicSearch);console.log(Playlist);}  )
+    const GetTracks = ()=>{
+        handleSonJour().then(function(MusicSearch){setPlaylist(MusicSearch);setvalid(true);}  )
             .catch(err=>console.log(err));
     };
 
@@ -40,9 +40,8 @@ const SonJour = () => {
 
     </Row>:<Button id="buttonplaylist" onClick={()=>{
                                 if(!valid){
-                                    setvalid(true)
                                 document.getElementById("buttonplaylist").style.display="none";
-                                    GetPlaylist();}
+                                    GetTracks();}
                                 }}>See your playlists</Button>}
 </Container>
     );

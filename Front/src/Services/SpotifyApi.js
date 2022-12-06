@@ -31,6 +31,7 @@ const handleSonJour = async () => {
     const PromiseUserSon = await fetch("/jour");
     const UserSonResponse = await PromiseUserSon.json();
     const GetUserSon = UserSonResponse.DataJour;
+    console.log(GetUserSon);
     return GetUserSon;
 }
 
