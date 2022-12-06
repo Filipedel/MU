@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
+import React, { useState} from "react";
+import {Container, InputGroup, Button, Row, Card} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Home/Image.css"
 import {submitEmotion,handleEmotion} from "../../Services/SpotifyApi";
 
 const emotion = () =>{
@@ -28,12 +27,12 @@ const emotion = () =>{
                                     setvalid(true)
                                 document.getElementById("buttonplaylist").style.display="none";
                                     GetPlaylist();}
-                                }}>See your playlists</Button>
+                                }}>Watch</Button>
                             :
     <InputGroup className={"mb-3"} size={"lg"}>
     <Button onClick={() => {submitEmotion("sad").catch(err=>console.log(err));setopen(true);}}>Triste</Button>
     <Button onClick={() => {submitEmotion("happy").catch(err=>console.log(err));setopen(true);}}>Heureux</Button>
-    <Button onClick={() => {submitEmotion("depressed").catch(err=>console.log(err));setopen(true);}}>Deprimé</Button>
+    <Button onClick={() => {submitEmotion("depressed").catch(err=>console.log(err));setopen(true);}}>Deprimé(e)</Button>
     <Button onClick={() => {submitEmotion("angry").catch(err=>console.log(err));setopen(true);}}>Enervé</Button>
     </InputGroup>
 }

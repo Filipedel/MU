@@ -11,7 +11,7 @@ import { Content, Heading } from './Component/BackgroundView/Styles';
         return (
             <div className={"particlesheader"}>
                 <ParticleBackground/>
-                <div className={"multicolortext"}>
+                <div >
                     <a href={"/"}><img src={image} alt="image" width="100" height={"60"}></img></a>
                     <Main/>
                     <ScrollButton/>

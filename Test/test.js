@@ -1,15 +1,6 @@
 
 
 
-const expect = require("chai").expect;
-const request = require("request");
 
-
-
-
-describe("Get '/playlist'", function (){
-  it("Main page should return data",function (done){
-
-      
-      })
-  })
+const mathOperations = { sum: function(a,b) { return a + b; }, diff: function(a,b) { return a - b; }, product: function(a,b) { return a * b } };
+describe('Calculator tests', () => { test('adding 1 + 2 should return 3', () => { expect(mathOperations.sum(1, 2)).toBe(3); }); })

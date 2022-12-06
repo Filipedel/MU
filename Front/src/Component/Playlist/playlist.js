@@ -23,11 +23,6 @@ const playlist = () => {
             .catch(err=>console.log(err));
     };
 
-
-
-
-
-
     return (
 
             <Container>
