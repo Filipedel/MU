@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import _ from 'lodash';
 import alert from "alert";
 import * as dotenv from 'dotenv'
+import {RandGenre} from "./Front/src/Component/genre/genre.js"
 
  dotenv.config()
 
@@ -32,11 +33,11 @@ let itemid;
 const Secret = process.env.Secret
 const Client = process.env.ClientID
 
-
 const spotifytoken = new  spotify({
   clientId: Client,
   clientSecret: Secret,
 })
+
 
 const  TokenRefresh = ()=>{
     spotifytoken.clientCredentialsGrant().then(
@@ -51,8 +52,6 @@ const  TokenRefresh = ()=>{
         console.log('Something went wrong when retrieving an access token', err);
     }
 )};
-
-
 
 //Beginning
 setTimeout(()=>{TokenRefresh()},0);
@@ -71,7 +70,7 @@ server.post("/search",(req,res)=>{
 
 //sending Tracks matching emotion
 server.get("/emotion", (req, res)=>{
-    spotifytoken.searchTracks(Emotion)
+    spotifytoken.searchTracks("track:"+Emotion+" year:2020-2022")
          .then(function(data) {
              console.log('Search by '+Emotion, data.body);
              res.send({
@@ -81,6 +80,17 @@ server.get("/emotion", (req, res)=>{
              console.error(err);
          });
 })
+// get new releases
+server.get("/release",(req,res)=>{
+    spotifytoken.getNewReleases({ limit : 20, offset: 0, country: 'FR' })
+  .then(function(data) {
+      res.send({
+        DataRelease: data.body
+      })
+    }, function(err) {
+       console.log("Something went wrong!", err);
+    });
+  });
 
 //recieved user from front to put into cookie
 
@@ -97,6 +107,49 @@ server.post("/playlist",(req,res) => {
 
 })
 
+
+//sending request tracks by genre 
+server.get("/jour", (req, res)=>{
+    var genre = RandGenre();
+    var tab = [];
+    var result;
+    var popMax = 0; 
+    // fait 50 requetes pour avoir 1000 musique diffèrentes 
+        for(let i = 0; i < 50;i++){
+            spotifytoken.searchTracks("genre:"+genre,{offset: i*20})
+         .then(function(data) {
+            result = data.body.tracks; 
+            // vérifie que chaque element de la requete satisfait un minimum de popularité
+            for (const [key, value] of Object.entries(result.items)) {
+                if(value?.popularity > popMax && value?.popularity > 30){
+                    tab.push(value);
+                    // modifie la popularité maximum en accordance avec les derniers titres ajouté
+                    if(value?.popularity > popMax){
+                        popMax = value.popularity;
+                    }
+                }
+              }
+            if(i == 49){
+                // filtre les titres n'ayant pas la popularité maximal
+                for(let y = 0; y < tab.length; y++){
+                    if(tab[y].popularity < popMax){
+                        tab.splice(y,1);
+                    }
+                }
+                // si plusieurs titre possède la meme popularité, on en garde juste 1
+                if(tab.length > 1){
+                    tab.splice(0,tab.length - 1);
+                }
+                console.log(tab);
+                  res.send({
+                      DataJour: tab[0]
+                  });
+            }
+         }, function(err) {
+             console.error(err);
+         });
+        }
+})
 
 //sending request playlist and user
 server.get("/playlist", (req, res)=>{
