@@ -1,26 +1,32 @@
-
 import express from "express";
+import next from 'next';
 
 import path from "path";
-const __dirname = path.resolve()
+// const __dirname = path.resolve()
 
 import spotify from "spotify-web-api-node";
 import cookieParser from "cookie-parser";
 import _ from 'lodash';
 import alert from "alert";
 import * as dotenv from 'dotenv'
-import {RandGenre} from "./Front/src/Component/genre/genre.js"
+import {RandGenre} from "./Front2/src/Component/genre/genre.js"
 
- dotenv.config()
-
+dotenv.config()
 
 const server = express();
+const nextApp = next({ dev: process.env.NODE_ENV !== 'production' })
+await nextApp.prepare()
+
+server.get('*', nextApp.getRequestHandler())
+
 
 server.use(express.json());
 server.use(cookieParser("USER"));
-server.use(express.static('Front/build'));
 
-///PLAYLIST and Home PAGE
+//maintenant Next.js gère lui-même le rendu et le routage, donc plus besoin de cette cmd :
+// server.use(express.static('Front/build'));
+
+///PLAYLIST and HomePAGE
 
 // form who cames from front
 let User ;
@@ -66,7 +72,7 @@ server.post("/search",(req,res)=>{
         return res.status(400).send({status:'failed'});
     }
   Emotion = emo;   
-    })
+    });
 
 //sending Tracks matching emotion
 server.get("/emotion", (req, res)=>{
@@ -203,17 +209,15 @@ server.get("/playlistitems", (req, res)=>{
 
 
 
-server.get("/*", (req, res)=>{
+/*nextApp.get("/!*", (req, res)=>{
     res.sendFile(path.join(__dirname, './Front/build/index.html'))
 
-})
+})*/
 
 
-const PORT = process.env.PORT || 8888;
-  
-server.listen(PORT, console.log(`Server started on port ${PORT}`));
+server.listen(3000, (err) => {
+    if (err) throw err;
+    console.log('Server ready on http://localhost:3000');
+});
 
-
-
-
-export  default server;
+export default server;
