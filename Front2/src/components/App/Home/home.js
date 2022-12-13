@@ -7,8 +7,6 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 
-
-
 //Open url spotify
 const openInNewTab = url => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -39,10 +37,10 @@ const home = () => {
             <br></br>
             Bienvenue à toi {dataUser.display_name}
         </div>
-            <Link href="/playlist">
+            <Link href="/app/playlist">
                 <Button >Playlist</Button>
             </Link>
-            <Link href="/emotion">
+            <Link href="/app/emotion">
           <Button>Emotion</Button>
           </Link>
             </Container>:
@@ -65,16 +63,16 @@ const home = () => {
           <Button onClick={() => openInNewTab('https://www.spotify.com/fr/account/overview/')}>
           Spotify
           </Button>
-          <Link href="/playlist">
+          <Link href="/app/playlist">
           <Button >Playlist</Button>
           </Link>
-          <Link href="/emotion">
+          <Link href="/app/emotion">
           <Button>Emotion</Button>
           </Link>
-          <Link href="/sonjour">
+          <Link href="/app/sonjour">
           <Button>Musique du Jour</Button>
           </Link>
-          <Link href="/releases">
+          <Link href="/app/releases">
           <Button>Sorties récentes FR</Button>
           </Link>
           </Row>

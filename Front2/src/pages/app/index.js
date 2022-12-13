@@ -1,23 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client'
-import App from "./App";
-import Main from "./Main";
-
+import React from "react";
 import { CookiesProvider } from "react-cookie";
+import App from "./App";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
 
+function Index() {
+    const router = useRouter();
+    const [cookies, setCookie] = useCookies([]);
 
-//const root = ReactDOM.createRoot(document.getElementById('root'));
-const AppPage = () => {
-/*React.createElement(
-    <React.StrictMode>
-        <CookiesProvider>
-            <App />
+    return (
+        <CookiesProvider cookies={cookies} setCookies={setCookie}>
+            <App router={router} />
         </CookiesProvider>
-    </React.StrictMode>,
-);*/
-
-    return(
-        <App/>
-    )
+    );
 }
-export default AppPage;
+
+export default Index;

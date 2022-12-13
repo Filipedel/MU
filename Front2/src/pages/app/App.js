@@ -17,8 +17,8 @@ const App = () => {
                     <a href={"/"}>
                         <Image src="/assets/images/logo.png" alt="logo Muzik" width={345} height={239}></Image>
                     </a>
-                    {/*<Main/>*/}
-                    {/*<ScrollButton/>*/}
+                    <Main/>
+                    <ScrollButton/>
                 </div>
 
             </div>);
