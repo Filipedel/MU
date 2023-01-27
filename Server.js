@@ -1,6 +1,7 @@
 
-import express from "express";
-
+import express, { query } from "express";
+import axios from 'axios';
+import * as querystring from 'querystring';
 import path from "path";
 const __dirname = path.resolve()
 
@@ -10,9 +11,9 @@ import _ from 'lodash';
 import alert from "alert";
 import * as dotenv from 'dotenv'
 import {RandGenre} from "./Front/src/Component/genre/genre.js"
+import SpotifyWebApi from "spotify-web-api-node";
 
  dotenv.config()
-
 
 const server = express();
 
@@ -32,32 +33,77 @@ let itemid;
 
 const Secret = process.env.Secret
 const Client = process.env.ClientID
+const REDIRECT_URI = 'http://localhost:8888/home';
 
-const spotifytoken = new  spotify({
+const spotifytoken = new  SpotifyWebApi({
   clientId: Client,
   clientSecret: Secret,
+  redirectUri:REDIRECT_URI, 
+})
+const generateRandomString = length => {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  };
+
+const stateKey = 'spotify_auth_state';
+// crée une url avec tout les accés souhaités et redirige vers cet url
+server.get('/login',(req,res)=>{
+    var scopes = ['user-read-private','user-read-email','user-library-read',
+    'user-library-modify','user-read-recently-played','user-top-read',
+    'user-read-playback-position','user-follow-read','user-follow-modify',
+    'playlist-modify-public','playlist-modify-private','playlist-read-collaborative',
+    'playlist-read-private','streaming','app-remote-control','user-read-currently-playing',
+    'user-modify-playback-state','user-read-playback-state','ugc-image-upload'],
+    redirect_uri = 'http://localhost:8888/home',client_id = Client,response_type = "code";
+    // crée une chaine sécuriser pour l'url
+    const state = generateRandomString(16);
+    res.cookie(stateKey,state);
+    var authorizeURL = spotifytoken.createAuthorizeURL(scopes,state);
+    res.redirect(authorizeURL);
 })
 
+// récupere le code fournie par l'url pour obtenir le token
+server.get('/home',(req,res)=>{
+    const code = req.query.code || null;
 
+    spotifytoken.authorizationCodeGrant(code).then(
+        function(data) {
+          console.log('The token expires in ' + data.body['expires_in']);
+          console.log('The access token is ' + data.body['access_token']);
+          console.log('The refresh token is ' + data.body['refresh_token']);
+      
+          // Set the access token on the API object to use it in later calls
+          spotifytoken.setAccessToken(data.body['access_token']);
+          spotifytoken.setRefreshToken(data.body['refresh_token']);
+        },
+        function(err) {
+          console.log('Something went wrong!', err);
+        }
+      );
+      res.redirect("http://localhost:8888")
+  });
+// rafraichit le token 
 const  TokenRefresh = ()=>{
-    spotifytoken.clientCredentialsGrant().then(
-    function(data) {
-        console.log('The access token expires in ' + data.body['expires_in']);
-        console.log('The access token is ' + data.body['access_token']);
+    spotifytoken.refreshAccessToken().then(
+        function(data) {
+          console.log('The access token has been refreshed!');
+      
+          // Save the access token so that it's used in future calls
+          spotifytoken.setAccessToken(data.body['access_token']);
+        },
+        function(err) {
+          console.log('Could not refresh access token', err);
+        }
+      );
+};
 
-        // Save the access token so that it's used in future calls
-        spotifytoken.setAccessToken(data.body['access_token']);
-    },
-    function(err) {
-        console.log('Something went wrong when retrieving an access token', err);
-    }
-)};
-
-//Beginning
-setTimeout(()=>{TokenRefresh()},0);
-//loop infinitely
+//demande a rafraichir le token toutes les heures
 setInterval(()=>{TokenRefresh();
-    alert("Rafraichir")},3.61e+6);
+    alert("Rafraichir")},3600000);
 
 // receive emotion from front
 server.post("/search",(req,res)=>{
