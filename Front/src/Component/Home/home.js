@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 
 
 //Open url spotify
-const replaceTab = url => {
-    window.location.replace(url, '_blank', 'noopener,noreferrer');
+const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
 
@@ -45,12 +45,6 @@ const home = () => {
             <Link to="/playlist">
                 <Button >Playlist</Button>
             </Link>
-            <Link to="/sonjour">
-          <Button>Musique du Jour</Button>
-          </Link>
-          <Link to="/releases">
-          <Button>Sorties récentes FR</Button>
-          </Link>
             <Link to="/emotion">
           <Button>Emotion</Button>
           </Link>
@@ -71,7 +65,7 @@ const home = () => {
           bouton.
           </p>
           <Row  className={"mx-2 row row-cols-5"}>
-          <Button onClick={() => replaceTab('http://localhost:8888/login')}>
+          <Button onClick={() => openInNewTab('https://www.spotify.com/fr/account/overview/')}>
           Spotify
           </Button>
           <Link to="/playlist">
