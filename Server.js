@@ -26,6 +26,7 @@ server.use(express.static('Front/build'));
 let User ;
 let Emotion;
 let itemid;
+let searchresult;
 
 
 //time refresh token variable
@@ -199,7 +200,27 @@ server.get("/playlistitems", (req, res)=>{
 
 })
 
+server.post("/research",(req,res)=>{
+    const { names } = req.body;
+    console.log(names);
+    if (! names){
+        return res.status(400).send({status:'failed'});
+    }
+  searchresult = names; 
+    })
 
+
+server.get("/research2", (req, res)=>{
+    spotifytoken.searchTracks("track:"+ searchresult)
+         .then(function(data) {
+             console.log('Search by '+ data.body.tracks);
+             res.send({
+                DataSearch: data.body
+             });
+         }, function(err) {
+             console.error(err);
+         });
+})
 
 
 
