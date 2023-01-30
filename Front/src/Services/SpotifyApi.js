@@ -19,6 +19,14 @@ const handleitemsplaylists = async () =>  {
 
 }
 
+const handleSearch = async () => {
+    const PromiseUserEmotion = await fetch("/research2");
+    const UserEmotionResponse = await PromiseUserEmotion.json();
+    const GetUserEmotion = UserEmotionResponse.DataSearch.tracks;
+    console.log(GetUserEmotion);
+    return GetUserEmotion;
+}
+
 const handleEmotion = async () => {
     const PromiseUserEmotion = await fetch("/emotion");
     const UserEmotionResponse = await PromiseUserEmotion.json();
@@ -79,6 +87,18 @@ const submitEmotion = async (emo) => {
     }).catch(err => {console.log(err)});
 }
 
+const searchsong = async (names) => {
+    await fetch("/research",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            names: names
+        })
+    }).catch(err => {console.log(err)});
+}
+
 
 export {
     handlePlaylist,
@@ -88,5 +108,7 @@ export {
     submitidback,
     submitEmotion,
     handleRelease,
-    handleitemsplaylists
+    handleitemsplaylists,
+    searchsong,
+    handleSearch
 }
