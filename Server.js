@@ -27,6 +27,7 @@ server.use(express.static('Front/build'));
 let User ;
 let Emotion;
 let itemid;
+let searchresult;
 
 
 
@@ -201,8 +202,17 @@ server.get("/playlistitems", (req, res)=>{
 
 })
 
+server.post("/research",(req,res)=>{
+    const { names } = req.body;
+    console.log(names);
+    if (! names){
+        return res.status(400).send({status:'failed'});
+    }
+  searchresult = names; 
+    })
 
 
+<<<<<<< HEAD
 server.get("/EmotionsSongs", (req,res)=>{
     var options = {
         args:
@@ -222,6 +232,19 @@ server.get("/EmotionsSongs", (req,res)=>{
 });
 
 
+=======
+server.get("/research2", (req, res)=>{
+    spotifytoken.searchTracks("track:"+ searchresult)
+         .then(function(data) {
+             console.log('Search by '+ data.body.tracks);
+             res.send({
+                DataSearch: data.body
+             });
+         }, function(err) {
+             console.error(err);
+         });
+})
+>>>>>>> 80f922e842a7c8b060b3651d0b39f02127e2414a
 
 
 
