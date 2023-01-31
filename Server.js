@@ -1,5 +1,5 @@
 
-import express from "express";
+import express, {request} from "express";
 
 import path from "path";
 const __dirname = path.resolve()
@@ -10,8 +10,9 @@ import _ from 'lodash';
 import alert from "alert";
 import * as dotenv from 'dotenv'
 import {RandGenre} from "./Front/src/Component/genre/genre.js"
-
  dotenv.config()
+import p from "python-shell";
+
 
 
 const server = express();
@@ -26,6 +27,7 @@ server.use(express.static('Front/build'));
 let User ;
 let Emotion;
 let itemid;
+
 
 
 //time refresh token variable
@@ -198,6 +200,26 @@ server.get("/playlistitems", (req, res)=>{
     })
 
 })
+
+
+
+server.get("/EmotionsSongs", (req,res)=>{
+    var options = {
+        args:
+            [
+                JSON.stringify("Hey")
+
+            ]
+    }
+    p.PythonShell.run('./SentimentAnalysis/main.py', options, function  (err, results)  {
+
+
+        console.log(results)
+
+    });
+
+
+});
 
 
 
