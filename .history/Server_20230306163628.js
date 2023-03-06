@@ -28,6 +28,8 @@ let User;
 let Emotion;
 let itemid;
 let searchresult;
+let track;
+let playlist;
 let access_token, token_type;
 const generateRandomString = (length) => {
   let text = "";
@@ -91,12 +93,10 @@ server.get("/home", (req, res) => {
       console.log("Something went wrong!", err);
     }
   );
-  res
-    .cookie("Connected", "True", {
+  res.cookie("Connected", "True", {
       sameSite: "none",
       secure: true,
-    })
-    .redirect("/");
+    }).redirect("/");
 });
 
 const TokenRefresh = () => {
@@ -158,29 +158,28 @@ server.post("/album/id", (req, res) => {
   if (!id) {
     return res.status(400).send({ status: "failed" });
   }
-  SpotifyUserToken.containsMySavedAlbums([id]).then(
-    function (data) {
-      // An array is returned, where the first element corresponds to the first album ID in the query
-      var albumIsInYourMusic = data.body[0];
+  SpotifyUserToken.containsMySavedAlbums([id])
+  .then(function(data) {
 
-      if (albumIsInYourMusic) {
-        console.log("Album was found in the user's Your Music library");
-      } else {
-        console.log("Album was not found.");
-        SpotifyUserToken.addToMySavedAlbums([id]).then(
-          function (data) {
-            console.log("Added album!");
-          },
-          function (err) {
-            console.log("Something went wrong!", err);
-          }
-        );
-      }
-    },
-    function (err) {
-      console.log("Something went wrong!", err);
+    // An array is returned, where the first element corresponds to the first album ID in the query
+    var albumIsInYourMusic = data.body[0];
+
+    if (albumIsInYourMusic) {
+      console.log('Album was found in the user\'s Your Music library');
+      SpotifyUserToken.addToMySavedAlbums([id])
+        .then(function(data) {
+      console.log('Added album!');
+        }, function(err) {
+          console.log('Something went wrong!', err);
+        });
+    } else {
+      console.log('Album was not found.');
     }
-  );
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+
+  
 });
 
 //sending Tracks matching emotion
@@ -198,6 +197,7 @@ server.get("/emotion", (req, res) => {
   );
 });
 
+
 // get new releases
 server.get("/release", (req, res) => {
   spotifytoken.getNewReleases({ limit: 20, offset: 0, country: "FR" }).then(
@@ -211,6 +211,7 @@ server.get("/release", (req, res) => {
     }
   );
 });
+
 
 //sending request tracks by genre
 server.get("/jour", (req, res) => {
@@ -260,17 +261,15 @@ server.get("/jour", (req, res) => {
 
 //sending request playlist and user
 server.get("/playlist", (req, res) => {
-  SpotifyUserToken.getMe().then(
-    function (data) {
-      res.cookie("Owner", data.body.id, {
-        sameSite: "none",
-        secure: true,
-      });
-    },
-    function (err) {
-      console.log("Something went wrong!", err);
-    }
-  );
+  SpotifyUserToken.getMe()
+  .then(function(data) {
+    res.cookie("Owner", data.body.id, {
+      sameSite: "none",
+      secure: true,
+    })
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
   SpotifyUserToken.getUserPlaylists().then(
     function (data) {
       console.log("Retrieved playlists", data.body);
@@ -284,6 +283,22 @@ server.get("/playlist", (req, res) => {
   );
 });
 
+server.get("/home", (req, res) => {
+  spotifytoken.getUser(User).then(
+    function (data) {
+      console.log("Retrieved UserStory", data.body);
+      res.send({
+        DataUser: data.body,
+      });
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
+});
+
+
+
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
   const { id } = req.body;
@@ -296,8 +311,15 @@ server.post("/playlist/id", (req, res) => {
 
 // add track to playlist
 server.post("/playlist/add", (req, res) => {
-  console.log(req.body.result[1]);
-  SpotifyUserToken.addTracksToPlaylist(req.body.result[1], [req.body.result[0]]).then(
+  playlist = req.body.result[1];
+  track = req.body.result[0];
+  
+});
+
+server.get("/playlist/add2", (req, res) => {
+  console.log(playlist);
+  console.log(track);
+  SpotifyUserToken.addTracksToPlaylist(playlist,track).then(
     function (data) {
       console.log("added items", data.body);
     },
@@ -306,7 +328,6 @@ server.post("/playlist/add", (req, res) => {
     }
   );
 });
-
 
 //sending request playlistitems
 server.get("/playlistitems", (req, res) => {

@@ -74,7 +74,7 @@ const AddAlbum = async (id) => {
         })
     }).catch(err => {console.log(err)});
 }
-//send playlist id and track uri to add the track to the playlist
+//send itemid to back to return playlist items
 const submitTrackback = async (result) => {
     fetch("/playlist/add",{
         method: "POST",
@@ -123,5 +123,6 @@ export {
     searchsong,
     handleSearch,
     submitTrackback,
+    handleTrackAdd,
     AddAlbum
 }

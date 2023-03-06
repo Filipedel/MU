@@ -284,6 +284,20 @@ server.get("/playlist", (req, res) => {
   );
 });
 
+server.get("/home", (req, res) => {
+  spotifytoken.getUser(User).then(
+    function (data) {
+      console.log("Retrieved UserStory", data.body);
+      res.send({
+        DataUser: data.body,
+      });
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
+});
+
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
   const { id } = req.body;

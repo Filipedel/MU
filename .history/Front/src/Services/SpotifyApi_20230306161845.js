@@ -10,6 +10,13 @@ const handlePlaylist =async () => {
     return GetUserPlaylist;
 }
 
+const handleTrackAdd =async () => {
+    const PromiseUserTrack = (await fetch("/playlist/add2"))
+    const UserTrackResponse = await PromiseUserTrack.json();
+    const GetUserPlaylist = UserTrackResponse.Dataplaylist;
+    return GetUserPlaylist;
+}
+
 
 const handleitemsplaylists = async () =>  {
     const PromisePlaylistTracks= await fetch("/playlistitems");
@@ -62,7 +69,7 @@ const submitidback = async (id) => {
         })
     }).catch(err => {console.log(err)});
 }
-//send Albumid to back to add to library
+//send itemid to back to return playlist items
 const AddAlbum = async (id) => {
     fetch("/album/id",{
         method: "POST",
@@ -74,7 +81,7 @@ const AddAlbum = async (id) => {
         })
     }).catch(err => {console.log(err)});
 }
-//send playlist id and track uri to add the track to the playlist
+//send itemid to back to return playlist items
 const submitTrackback = async (result) => {
     fetch("/playlist/add",{
         method: "POST",
@@ -123,5 +130,6 @@ export {
     searchsong,
     handleSearch,
     submitTrackback,
+    handleTrackAdd,
     AddAlbum
 }

@@ -17,7 +17,6 @@ const playlist = () => {
     //Get playlistUsers
     const [Playlist,setPlaylist]= useState({});
 
-    // récupère la liste des cookies
     const cookieList = document.cookie
     .split(';')
     .map(cookie => cookie.split('='))
@@ -28,10 +27,9 @@ const playlist = () => {
             .catch(err=>console.log(err));
     };
 
-    // vérifie qu'il y ait un track stocké en session puis l'envoi vers le back
-    const AddPlaylist = (id)=>{
+    const AddPlaylist = ()=>{
         if(sessionStorage.getItem("TracksToPlaylist") != null){
-            submitTrackback([sessionStorage.getItem("TracksToPlaylist"),id]).catch(
+            submitTrackback([sessionStorage.getItem("TracksToPlaylist"),document.getElementById("buttonAddPlaylist").value]).catch(
                 err=>console.log(err));
         }
         sessionStorage.removeItem("TracksToPlaylist");
@@ -76,9 +74,8 @@ const playlist = () => {
                                         See tracks
                                     </button>
                                     </a>
-                                    {/* vérifie l'url et affiche le bouton si on est sur l'url d'ajout de track */}
                                     {window.location.href == "http://localhost:8888/playlistsAdd" ?
-                                    <button type="button" id="buttonAddPlaylist" class={Playlist.owner.id == cookieList.Owner ? "btn btn-primary" : "btn btn-primary Disabled"} onClick={()=>{AddPlaylist(Playlist.id);} }>
+                                    <button type="button" id="buttonAddPlaylist" class={Playlist.owner.id == cookieList.Owner ? "btn btn-primary" : "btn btn-primary Disabled"} value={Playlist.id} onClick={()=>{AddPlaylist();} }>
                                         Add to playlist
                                     </button> : null}
                                 </Card>)

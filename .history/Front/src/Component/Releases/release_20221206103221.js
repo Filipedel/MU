@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Home/Image.css"
-import {handleRelease,AddAlbum} from "../../Services/SpotifyApi";
+import {handleRelease} from "../../Services/SpotifyApi";
 
 const Release = () => {
 
@@ -29,9 +29,6 @@ const [valid,setvalid]=useState(false);
                                         null
                                     } />
                                     <Card.Title>{Playlist.name}</Card.Title>
-                                    <button type="button" class="btn btn-primary" onClick={()=>{AddAlbum(Playlist.id);} }>
-                                        Add to Library
-                                    </button>
                                 </Card>)
 
                 }) : null }

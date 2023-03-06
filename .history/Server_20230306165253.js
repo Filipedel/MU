@@ -284,6 +284,20 @@ server.get("/playlist", (req, res) => {
   );
 });
 
+server.get("/home", (req, res) => {
+  spotifytoken.getUser(User).then(
+    function (data) {
+      console.log("Retrieved UserStory", data.body);
+      res.send({
+        DataUser: data.body,
+      });
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
+});
+
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
   const { id } = req.body;
@@ -296,7 +310,6 @@ server.post("/playlist/id", (req, res) => {
 
 // add track to playlist
 server.post("/playlist/add", (req, res) => {
-  console.log(req.body.result[1]);
   SpotifyUserToken.addTracksToPlaylist(req.body.result[1], [req.body.result[0]]).then(
     function (data) {
       console.log("added items", data.body);

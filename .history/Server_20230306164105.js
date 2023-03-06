@@ -28,6 +28,8 @@ let User;
 let Emotion;
 let itemid;
 let searchresult;
+let track;
+let playlist;
 let access_token, token_type;
 const generateRandomString = (length) => {
   let text = "";
@@ -284,6 +286,20 @@ server.get("/playlist", (req, res) => {
   );
 });
 
+server.get("/home", (req, res) => {
+  spotifytoken.getUser(User).then(
+    function (data) {
+      console.log("Retrieved UserStory", data.body);
+      res.send({
+        DataUser: data.body,
+      });
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
+});
+
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
   const { id } = req.body;
@@ -296,8 +312,14 @@ server.post("/playlist/id", (req, res) => {
 
 // add track to playlist
 server.post("/playlist/add", (req, res) => {
-  console.log(req.body.result[1]);
-  SpotifyUserToken.addTracksToPlaylist(req.body.result[1], [req.body.result[0]]).then(
+  playlist = req.body.result[1];
+  track = req.body.result[0];
+});
+
+server.get("/playlist/add2", (req, res) => {
+  console.log(playlist);
+  console.log(track);
+  SpotifyUserToken.addTracksToPlaylist(playlist, [track]).then(
     function (data) {
       console.log("added items", data.body);
     },
@@ -306,7 +328,6 @@ server.post("/playlist/add", (req, res) => {
     }
   );
 });
-
 
 //sending request playlistitems
 server.get("/playlistitems", (req, res) => {
