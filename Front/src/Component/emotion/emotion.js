@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import {Container, InputGroup, Button, Row, Card} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
-import {submitEmotion,handleEmotion} from "../../Services/SpotifyApi";
+import {submitEmotion,handleEmotion,submitTrackbackem} from "../../Services/SpotifyApi";
 
 const emotion = () =>{
     // not working until data are fetched
@@ -16,6 +16,14 @@ const emotion = () =>{
         handleEmotion().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
+    const AddPlaylist = (id)=>{
+        if(sessionStorage.getItem("TracksToPlaylist") != null){
+            submitTrackbackem([sessionStorage.getItem("TracksToPlaylist"),id]).catch(
+                err=>console.log(err));
+        }
+        sessionStorage.removeItem("TracksToPlaylist");
+        
+    }
 
     return(
         
@@ -51,6 +59,10 @@ const emotion = () =>{
                     } />
                     <Card.Title>{Playlist.album.name} </Card.Title>
                     <Card.Text>ArtistName:{Playlist.artists[0].name}, Popularity:{Playlist.popularity}</Card.Text>
+                    {window.location.href == "http://localhost:8888/playlistsAdd" ?
+                                    <button type="button" id="buttonAddPlaylist" class={Playlist.owner.id == cookieList.Owner ? "btn btn-primary" : "btn btn-primary Disabled"} onClick={()=>{AddPlaylist(Playlist.id);} }>
+                                        Add to playlist
+                                    </button> : null}
                 </Card>)
 
         }) : null}

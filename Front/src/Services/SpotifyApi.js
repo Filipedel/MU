@@ -86,6 +86,28 @@ const submitTrackback = async (result) => {
         })
     }).catch(err => {console.log(err)});
 }
+const submitTrackbackrs = async (result) => {
+    fetch("/resarch/add",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            result:result
+        })
+    }).catch(err => {console.log(err)});
+}
+const submitTrackbackem = async (result) => {
+    fetch("/emotion/add",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            result:result
+        })
+    }).catch(err => {console.log(err)});
+}
 // send Emotion choice to server
 const submitEmotion = async (emo) => {
     await fetch("/search",{
@@ -123,5 +145,7 @@ export {
     searchsong,
     handleSearch,
     submitTrackback,
+    submitTrackbackrs,
+    submitTrackbackem,
     AddAlbum
 }
