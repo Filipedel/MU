@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import {Container, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
-import {searchsong,handleSearch} from "../../Services/SpotifyApi";
+import {searchsong,handleSearch,submitTrackback} from "../../Services/SpotifyApi";
 
 const research = () =>{
     // not working until data are fetched
@@ -18,6 +18,14 @@ const research = () =>{
         handleSearch().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
+    const AddPlaylist = (id)=>{
+        if(sessionStorage.getItem("TracksToPlaylist") != null){
+            submitTrackback([sessionStorage.getItem("TracksToPlaylist"),id]).catch(
+                err=>console.log(err));
+        }
+        sessionStorage.removeItem("TracksToPlaylist");
+        
+    }
 
 
     return(
@@ -63,8 +71,10 @@ const research = () =>{
                     } />
                     <Card.Title>{Playlist.album.name} </Card.Title>
                     <Card.Text>ArtistName:{Playlist.artists[0].name}, Popularity:{Playlist.popularity}</Card.Text>
-                    <Button onClick={  () => {sessionStorage.setItem("TracksToPlaylist",Playlist.uri);
-                                    }} href="/playlistsAdd">Add to Playlist</Button>
+                    {window.location.href == "http://localhost:8888/playlistsAdd" ?
+                                    <button type="button" id="buttonAddPlaylist" class={Playlist.owner.id == cookieList.Owner ? "btn btn-primary" : "btn btn-primary Disabled"} onClick={()=>{AddPlaylist(Playlist.id);} }>
+                                        Add to playlist
+                                    </button> : null}
                 </Card>)
 
         }) : null}

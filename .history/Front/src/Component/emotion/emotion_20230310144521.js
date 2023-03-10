@@ -1,9 +1,9 @@
 import React, { useState} from "react";
-import {Container, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap'
+import {Container, InputGroup, Button, Row, Card} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
-import {searchsong,handleSearch} from "../../Services/SpotifyApi";
+import {submitEmotion,handleEmotion} from "../../Services/SpotifyApi";
 
-const research = () =>{
+const emotion = () =>{
     // not working until data are fetched
     const [open,setopen]=useState(false);
      // not working until data are fetched
@@ -11,14 +11,11 @@ const research = () =>{
     //Get playlist matching emotion
     const [Playlist,setPlaylist]= useState({});
 
-    const [song, setSong] = useState("");
-
 
     const GetPlaylist = ()=>{
-        handleSearch().then(MusicSearch => setPlaylist(MusicSearch))
+        handleEmotion().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
-
 
     return(
         
@@ -32,22 +29,13 @@ const research = () =>{
                                     GetPlaylist();}
                                 }}>Watch</Button>
                             :
-                            <InputGroup className={"mb-3"} size={"lg"}>
-                            <FormControl placeholder={"enter a song name"} type={'input'}
-                                         onChange={event => {
-                                             setSong(event.target.value)
-                                         }}
-                                         onKeyPress={   (event) => {
-                                             if (event.key === "Enter") {
-                                                searchsong(song).catch(err=>console.log(err));setopen(true);
-                                             }
-                                         }}/>
-                            <Button onClick={() => {searchsong(song).catch(err=>console.log(err));setopen(true);}}>Search</Button>
-                        </InputGroup>
-   
-
- 
-} 
+    <InputGroup className={"mb-3"} size={"lg"}>
+    <Button onClick={() => {submitEmotion("sad").catch(err=>console.log(err));setopen(true);}}>Triste</Button>
+    <Button onClick={() => {submitEmotion("happy").catch(err=>console.log(err));setopen(true);}}>Heureux</Button>
+    <Button onClick={() => {submitEmotion("depressed").catch(err=>console.log(err));setopen(true);}}>Deprimé(e)</Button>
+    <Button onClick={() => {submitEmotion("angry").catch(err=>console.log(err));setopen(true);}}>Enervé</Button>
+    </InputGroup>
+}
 {valid === true ?
     <Row className={"mx-2 row row-cols-4" } >
 
@@ -63,8 +51,10 @@ const research = () =>{
                     } />
                     <Card.Title>{Playlist.album.name} </Card.Title>
                     <Card.Text>ArtistName:{Playlist.artists[0].name}, Popularity:{Playlist.popularity}</Card.Text>
-                    <Button onClick={  () => {sessionStorage.setItem("TracksToPlaylist",Playlist.uri);
-                                    }} href="/playlistsAdd">Add to Playlist</Button>
+                    {window.location.href == "http://localhost:8888/playlistsAdd" ?
+                                    <button type="button" id="buttonAddPlaylist" class={Playlist.owner.id == cookieList.Owner ? "btn btn-primary" : "btn btn-primary Disabled"} onClick={()=>{AddPlaylist(Playlist.id);} }>
+                                        Add to playlist
+                                    </button> : null}
                 </Card>)
 
         }) : null}
@@ -74,4 +64,4 @@ const research = () =>{
     );
 }
 
-export default research;
+export default emotion;
