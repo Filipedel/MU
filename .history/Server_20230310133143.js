@@ -209,14 +209,12 @@ server.get("/getTop", (req, res) => {
   }).then(SpotifyUserToken.getMyTopTracks()
   .then(function(data) {
     result.push(data.body);
-    if(result.length == 2){
-    res.send({
-      DataUser: result,
-    });
-  }
+    console.log(result);
   }, function(err) {
     console.log('Something went wrong!', err);
-  }))
+  })).then(
+     res.send(result)
+  );
 });
 
 // get new releases

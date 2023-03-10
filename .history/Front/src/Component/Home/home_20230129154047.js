@@ -3,10 +3,17 @@ import "./Image.css"
 import React, {useEffect, useState} from "react";
 import {
   Container,
+  Button,
   Row, Image,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
+
+//Open url spotify
+const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
 
 const home = () => {

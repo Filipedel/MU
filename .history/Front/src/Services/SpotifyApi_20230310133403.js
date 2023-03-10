@@ -1,4 +1,5 @@
 
+import React from "react";
 
 
 
@@ -13,6 +14,7 @@ const handleGetTOp =async () => {
     const PromiseUserTop = (await fetch("/getTop"))
     const UserTopResponse = await PromiseUserTop.json();
     const GetUserTop = UserTopResponse.DataUser;
+    console.log(GetUserTop);
     return GetUserTop;
 }
 

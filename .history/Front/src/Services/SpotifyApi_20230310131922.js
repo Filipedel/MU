@@ -1,4 +1,5 @@
 
+import React from "react";
 
 
 
@@ -12,7 +13,8 @@ const handlePlaylist =async () => {
 const handleGetTOp =async () => {
     const PromiseUserTop = (await fetch("/getTop"))
     const UserTopResponse = await PromiseUserTop.json();
-    const GetUserTop = UserTopResponse.DataUser;
+    const GetUserTop = UserTopResponse.Dataplaylist;
+    console.log(GetUserTop);
     return GetUserTop;
 }
 
@@ -129,6 +131,5 @@ export {
     searchsong,
     handleSearch,
     submitTrackback,
-    AddAlbum,
-    handleGetTOp
+    AddAlbum
 }

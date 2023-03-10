@@ -204,19 +204,19 @@ server.get("/getTop", (req, res) => {
   SpotifyUserToken.getMyTopArtists()
   .then(function(data) {
      result.push(data.body);
+    console.log(result);
   }, function(err) {
     console.log('Something went wrong!', err);
   }).then(SpotifyUserToken.getMyTopTracks()
   .then(function(data) {
     result.push(data.body);
-    if(result.length == 2){
-    res.send({
-      DataUser: result,
-    });
-  }
+    console.log(result);
   }, function(err) {
     console.log('Something went wrong!', err);
-  }))
+  })).then(
+    console.log("aaa" + result),
+     res.send(result)
+  );
 });
 
 // get new releases

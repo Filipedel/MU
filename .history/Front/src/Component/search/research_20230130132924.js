@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import {Container, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap'
+import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import {searchsong,handleSearch} from "../../Services/SpotifyApi";
 

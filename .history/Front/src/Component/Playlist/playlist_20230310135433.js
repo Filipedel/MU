@@ -1,15 +1,17 @@
-import React, {useState} from "react";
-import {Container, Button, Row, Card} from 'react-bootstrap'
+import React, {useEffect, useState} from "react";
+import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Home/Image.css"
 import "../Playlist/playlist.css"
-import {handlePlaylist, submitidback,submitTrackback} from "../../Services/SpotifyApi";
+import {handlePlaylist, submitidback,submitTrackback,handleTrackAdd} from "../../Services/SpotifyApi";
 
 
 
 
 const playlist = () => {
 
+   //data user
+    const [user, setuserid] = useState("");
    //see playlist (cookie)
     const [open,setopen]=useState(false);
     //Get playlistUsers

@@ -13,7 +13,7 @@ import ScrollButton from './Component/BackgroundView/ScrollButton';
             <div className={"particlesheader"}>
                 <ParticleBackground/>
                 <div>
-                    <a href={"/"}><img src={image} alt="logo" width="100" height={"60"} ></img></a>
+                    <a href={"/"}><img src={image} alt="image" width="100" height={"60"} ></img></a>
                     <Main/>
                     <ScrollButton/>
                 </div>

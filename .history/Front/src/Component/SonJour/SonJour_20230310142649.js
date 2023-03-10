@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import {Container, Button, Row, Card} from 'react-bootstrap'
+import {Container, Button, Row, Card, Image} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Home/Image.css";
 import {handleSonJour} from "../../Services/SpotifyApi";
