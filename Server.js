@@ -14,6 +14,11 @@ import { wait } from "@testing-library/user-event/dist/utils/index.js";
 
 dotenv.config();
 
+const spotify = require("spotify-web-api-node");
+const cookieParser = require("cookie-parser");
+const _ = require('lodash');
+const dotenv = require('dotenv');
+const RandGenre = require("./Front/src/Component/genre/genre.js").RandGenre;
 const server = express();
 dotenv.config()
 server.use(express.json());
@@ -37,6 +42,7 @@ const generateRandomString = (length) => {
   }
   return text;
 };
+
 
 //time refresh token variable
 
