@@ -1,0 +1,44 @@
+{
+  "name": "Muzik",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "proxy": "http://localhost:3000",
+  "dependencies": {
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "code-formatter": "^0.0.2",
+    "jest": "23.6.0",
+    "react-bootstrap": "^2.5.0",
+    "react-cookie": "^4.1.1",
+    "react-cookie-consent": "^8.0.1",
+    "react-icons": "^4.6.0",
+    "react-tsparticles": "1.42.4",
+    "reactjs-popup": "^2.0.5",
+    "spotify-web-api-node": "^5.0.2",
+    "styled-components": "^5.3.6",
+    "web-vitals": "^2.1.4",
+    "next": "^13.0.6",
+    "node-sass": "^6.0.1",
+    "react": "^18.2.0",
+    "react-countup": "^6.1.0",
+    "react-dom": "^18.2.0",
+    "react-id-swiper": "^4.0.0",
+    "react-modal-video": "^1.2.8",
+    "react-visibility-sensor": "^5.1.1",
+    "swiper": "5.4.5"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "3.9.2",
+    "url-loader": "^4.1.1"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
