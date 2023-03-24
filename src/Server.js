@@ -1,14 +1,20 @@
-
 const express = require("express");
 const path = require("path");
+const __dirname = path.resolve()
 
 const spotify = require("spotify-web-api-node");
 const cookieParser = require("cookie-parser");
 const _ = require('lodash');
-const dotenv = require('dotenv');
+const alert = require("alert");
+const dotenv = require('dotenv')
 const RandGenre = require("./Front/src/Component/genre/genre.js").RandGenre;
+
+
+ dotenv.config()
+
+
 const server = express();
-dotenv.config()
+
 server.use(express.json());
 server.use(cookieParser("USER"));
 server.use(express.static('Front/build'));
@@ -22,14 +28,12 @@ let itemid;
 let searchresult;
 
 
-
 //time refresh token variable
 
-const Secret = process.env.SecretID
+const Secret = process.env.Secret
 const Client = process.env.ClientID
 
-
-const spotifytoken = new spotify({
+const spotifytoken = new  spotify({
   clientId: Client,
   clientSecret: Secret,
 })
@@ -53,7 +57,7 @@ const  TokenRefresh = ()=>{
 setTimeout(()=>{TokenRefresh()},0);
 //loop infinitely
 setInterval(()=>{TokenRefresh();
-    console.log("rafraîchir");},3.61e+6);
+    alert("Rafraichir")},3.61e+6);
 
 // receive emotion from front
 server.post("/search",(req,res)=>{
@@ -205,8 +209,6 @@ server.post("/research",(req,res)=>{
     })
 
 
-
-
 server.get("/research2", (req, res)=>{
     spotifytoken.searchTracks("track:"+ searchresult)
          .then(function(data) {
@@ -222,7 +224,9 @@ server.get("/research2", (req, res)=>{
 
 
 server.get("/*", (req, res)=>{
-    res.sendFile(path.join(path.resolve()), './Front/build/index.html')})
+    res.sendFile(path.join(__dirname, './Front/build/index.html'))
+
+})
 
 
 const PORT = process.env.PORT || 8888;
@@ -231,3 +235,5 @@ server.listen(PORT, console.log(`Server started on port ${PORT}`));
 
 
 
+
+export  default server;
