@@ -58,7 +58,8 @@
   "scripts": {
     "build": "tsc src/index.ts",
     "start": "nodemon Server.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "test":""
   },
   "repository": {
     "type": "git",
