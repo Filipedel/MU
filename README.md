@@ -20,6 +20,8 @@
 
 ### 1- Vous devez cloner le projet sur un dossier vide.
 
-### 2- Allez dans le dossier et lancer ```npm run build``` puis ``` npm run watch```
+### 2- Installer les dépendances du projet avec ```npm install``` (dans la racine du projet et dans ```/Front```)
 
-### 3- Accèdez au lien http://localhost:8888/ 
+### 3- À la racine du projet, executez ```npm run build``` puis ``` npm run watch```
+
+### 4- Accèdez au lien http://localhost:8888/ 
