@@ -22,6 +22,7 @@ const Navigbar = () => {
             <Nav.Link href="/searchTrack">Recherche</Nav.Link>
             <Nav.Link href="/topUser">Top</Nav.Link>
             <Nav.Link href="/login">
+            <Nav.Link href="/lyrics">Paroles</Nav.Link>
               Connexion
             </Nav.Link>
           </Nav>

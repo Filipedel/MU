@@ -8,6 +8,7 @@ import Top from "./Component/TopUser/Top";
 import Jour from "./Component/SonJour/SonJour";
 import Rel from "./Component/Releases/release";
 import Rech from "./Component/search/research";
+import Lyrics from "./Component/Lyrics/lyrics";
 
 const Main = () => {
   return (
@@ -21,6 +22,7 @@ const Main = () => {
         <Route path='/sonjour' element={<Jour/>}/>
         <Route path='/releases' element={<Rel/>}/>
         <Route path='/searchTrack' element={<Rech/>}/>
+        <Route path='/lyrics' element={<Lyrics/>}/>
     </Routes>
   );
 }

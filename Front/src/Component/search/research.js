@@ -18,8 +18,6 @@ const research = () =>{
         handleSearch().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
-
-
     return(
         
         <Container>

@@ -304,6 +304,42 @@ server.get("/playlist", (req, res) => {
     }
   );
 });
+})
+
+//sending request playlistitems
+server.get("/playlistitems", (req, res)=>{
+    spotifytoken.getPlaylistTracks(itemid).then(function (data){
+        console.log('Retrieved items', data.body);
+        res.send({
+            Playlistitems: data.body
+        })
+    },function (err){
+        console.log('Something went wrong!', err);
+    })
+
+})
+
+server.post("/research",(req,res)=>{
+    const { names } = req.body;
+    console.log(names);
+    if (! names){
+        return res.status(400).send({status:'failed'});
+    }
+  searchresult = names; 
+    })
+
+
+server.get("/research2", (req, res)=>{
+    spotifytoken.searchTracks("track:"+ searchresult)
+         .then(function(data) {
+             console.log('Search by '+ data.body.tracks);
+             res.send({
+                DataSearch: data.body
+             });
+         }, function(err) {
+             console.error(err);
+         });
+})
 
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
