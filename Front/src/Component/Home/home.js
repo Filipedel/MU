@@ -42,12 +42,6 @@ const home = () => {
             <br></br>
             Bienvenue à toi {dataUser.display_name}
         </div>
-            <Link to="/playlist">
-                <Button >Playlist</Button>
-            </Link>
-            <Link to="/emotion">
-          <Button>Emotion</Button>
-          </Link>
             </Container>:
             <Container>
             <Row className={"mx-2 row row-cols-12"}>
@@ -64,23 +58,6 @@ const home = () => {
           d'utilisateur puis le rentrer sur la page disponible via le 2ème
           bouton.
           </p>
-          <Row  className={"mx-2 row row-cols-5"}>
-          <Button onClick={() => openInNewTab('https://www.spotify.com/fr/account/overview/')}>
-          Spotify
-          </Button>
-          <Link to="/playlist">
-          <Button >Playlist</Button>
-          </Link>
-          <Link to="/emotion">
-          <Button>Emotion</Button>
-          </Link>
-          <Link to="/sonjour">
-          <Button>Musique du Jour</Button>
-          </Link>
-          <Link to="/releases">
-          <Button>Sorties récentes FR</Button>
-          </Link>
-          </Row>
             </Container>
         }
 
