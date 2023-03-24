@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "commonjs",
   "dependencies": {
-<<<<<<< Updated upstream
     "@ksoft/api": "^3.1.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -29,15 +28,12 @@
     "react-cookie": "^4.1.1",
     "react-cookie-consent": "^8.0.1",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-scripts": "^2.1.3",
     "request-promise": "^4.2.6",
-=======
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.0",
     "react-scripts": "^2.1.8",
     "react-tsparticles": "^2.8.0",
->>>>>>> 80f922e842a7c8b060b3651d0b39f02127e2414a
     "spotify-web-api-node": "^5.0.2",
     "styled-components": "^5.3.6",
     "supertest": "^6.3.1",
@@ -60,8 +56,7 @@
     "request": "^2.88.2",
     "translate": "^1.4.1",
     "window": "^4.2.7",
-    "window-alert": "^1.0.0"
-=======
+    "window-alert": "^1.0.0",
     "@types/axios": "^0.14.0",
     "@types/morgan": "^1.9.4",
     "@types/spotify-web-api-node": "^5.0.7",
@@ -258,6 +253,5 @@
     "tsconfig-paths": "^4.1.2",
     "tsup": "^6.5.0",
     "typescript": "^4.9.5"
->>>>>>> Stashed changes
   }
 }
