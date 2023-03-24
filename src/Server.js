@@ -1,15 +1,14 @@
-
-import express from "express";
-
-import path from "path";
+const express = require("express");
+const path = require("path");
 const __dirname = path.resolve()
 
-import spotify from "spotify-web-api-node";
-import cookieParser from "cookie-parser";
-import _ from 'lodash';
-import alert from "alert";
-import * as dotenv from 'dotenv'
-import {RandGenre} from "./Front/src/Component/genre/genre.js"
+const spotify = require("spotify-web-api-node");
+const cookieParser = require("cookie-parser");
+const _ = require('lodash');
+const alert = require("alert");
+const dotenv = require('dotenv')
+const RandGenre = require("./Front/src/Component/genre/genre.js").RandGenre;
+
 
  dotenv.config()
 

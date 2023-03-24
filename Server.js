@@ -1,22 +1,14 @@
 
-import express, {request} from "express";
+const express = require("express");
+const path = require("path");
 
-import path from "path";
-const __dirname = path.resolve()
-
-import spotify from "spotify-web-api-node";
-import cookieParser from "cookie-parser";
-import _ from 'lodash';
-import alert from "alert";
-import * as dotenv from 'dotenv'
-import {RandGenre} from "./Front/src/Component/genre/genre.js"
- dotenv.config()
-import p from "python-shell";
-
-
-
+const spotify = require("spotify-web-api-node");
+const cookieParser = require("cookie-parser");
+const _ = require('lodash');
+const dotenv = require('dotenv');
+const RandGenre = require("./Front/src/Component/genre/genre.js").RandGenre;
 const server = express();
-
+dotenv.config()
 server.use(express.json());
 server.use(cookieParser("USER"));
 server.use(express.static('Front/build'));
@@ -33,10 +25,11 @@ let searchresult;
 
 //time refresh token variable
 
-const Secret = process.env.Secret
+const Secret = process.env.SecretID
 const Client = process.env.ClientID
 
-const spotifytoken = new  spotify({
+
+const spotifytoken = new spotify({
   clientId: Client,
   clientSecret: Secret,
 })
@@ -60,7 +53,7 @@ const  TokenRefresh = ()=>{
 setTimeout(()=>{TokenRefresh()},0);
 //loop infinitely
 setInterval(()=>{TokenRefresh();
-    alert("Rafraichir")},3.61e+6);
+    console.log("rafraîchir");},3.61e+6);
 
 // receive emotion from front
 server.post("/search",(req,res)=>{
@@ -212,27 +205,8 @@ server.post("/research",(req,res)=>{
     })
 
 
-<<<<<<< HEAD
-server.get("/EmotionsSongs", (req,res)=>{
-    var options = {
-        args:
-            [
-                JSON.stringify("Hey")
-
-            ]
-    }
-    p.PythonShell.run('./SentimentAnalysis/main.py', options, function  (err, results)  {
 
 
-        console.log(results)
-
-    });
-
-
-});
-
-
-=======
 server.get("/research2", (req, res)=>{
     spotifytoken.searchTracks("track:"+ searchresult)
          .then(function(data) {
@@ -244,14 +218,11 @@ server.get("/research2", (req, res)=>{
              console.error(err);
          });
 })
->>>>>>> 80f922e842a7c8b060b3651d0b39f02127e2414a
 
 
 
 server.get("/*", (req, res)=>{
-    res.sendFile(path.join(__dirname, './Front/build/index.html'))
-
-})
+    res.sendFile(path.join(path.resolve()), './Front/build/index.html')})
 
 
 const PORT = process.env.PORT || 8888;
@@ -260,5 +231,3 @@ server.listen(PORT, console.log(`Server started on port ${PORT}`));
 
 
 
-
-export  default server;
