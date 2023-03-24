@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import {Container, InputGroup, FormControl, Button, Row, Card, Image} from 'react-bootstrap'
+import {Container, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import {searchsong,handleSearch} from "../../Services/SpotifyApi";
 
@@ -18,7 +18,6 @@ const research = () =>{
         handleSearch().then(MusicSearch => setPlaylist(MusicSearch))
             .catch(err=>console.log(err));
     };
-
     return(
         
         <Container>
@@ -62,6 +61,8 @@ const research = () =>{
                     } />
                     <Card.Title>{Playlist.album.name} </Card.Title>
                     <Card.Text>ArtistName:{Playlist.artists[0].name}, Popularity:{Playlist.popularity}</Card.Text>
+                    <Button onClick={  () => {sessionStorage.setItem("TracksToPlaylist",Playlist.uri);
+                                    }} href="/playlistsAdd">Add to Playlist</Button>
                 </Card>)
 
         }) : null}

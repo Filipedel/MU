@@ -1,16 +1,13 @@
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 const Navigbar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+        <Navbar.Brand href="/">Muzik</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -22,9 +19,10 @@ const Navigbar = () => {
             <Nav.Link href="/emotions">Emotion</Nav.Link>
             <Nav.Link href="/sonjour">Son du jour</Nav.Link>
             <Nav.Link href="/releases">Sorties FR</Nav.Link>
-            <Nav.Link href="/lyrics">Paroles</Nav.Link>
             <Nav.Link href="/searchTrack">Recherche</Nav.Link>
-            <Nav.Link href="/login" disabled>
+            <Nav.Link href="/topUser">Top</Nav.Link>
+            <Nav.Link href="/login">
+            <Nav.Link href="/lyrics">Paroles</Nav.Link>
               Connexion
             </Nav.Link>
           </Nav>
