@@ -238,55 +238,54 @@ server.get("/jour", (req, res) => {
   var result;
   var usable = 0;
   var popMax = 0;
-  spotifytoken.getAvailableGenreSeeds()
+  
+  let genre = spotifytoken.getAvailableGenreSeeds()
   .then(function(data) {
    let genreSeeds = data.body.genres;
-   genre = genreSeeds[Math.floor(Math.random() * (genreSeeds.length - 0 + 1)) + 0];
-    console.log(genreSeeds);
+   let genre = genreSeeds[Math.floor(Math.random() * (genreSeeds.length - 0 + 1)) + 0];
+   return genre;
   }, function(err) {
     console.log('Something went wrong!', err);
-  }).then( function () {
-    for (let i = 0; i < 50; i++) {
-      spotifytoken.searchTracks("genre:" + genre, { offset: i * 20 }).then(
-        function (data) {
-          result = data.body.tracks;
-          // vérifie que chaque element de la requete satisfait un minimum de popularité
-          for (const [key, value] of Object.entries(result.items)) {
-            if (value?.popularity > popMax && value?.popularity > 30) {
-              tab.push(value);
-              // modifie la popularité maximum en accordance avec les derniers titres ajouté
-              if (value?.popularity > popMax) {
-                popMax = value.popularity;
-              }
-            }
-          }
-          if (i == 49) {
-            // filtre les titres n'ayant pas la popularité maximal
-            for (let y = 0; y < tab.length; y++) {
-              if (tab[y].popularity < popMax) {
-                tab.splice(y, 1);
-              }
-            }
-            // si plusieurs titre possède la meme popularité, on en garde juste 1
-            if (tab.length > 1) {
-              tab.splice(0, tab.length - 1);
-            }
-            console.log(tab);
-            res.send({
-              DataJour: tab[0],
-            });
-          }
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
-    }
   });
+  console.log(genre);
   // fait 50 requetes pour avoir 1000 musique diffèrentes
-  
+  for (let i = 0; i < 50; i++) {
+    spotifytoken.searchTracks("genre:" + genre, { offset: i * 20 }).then(
+      function (data) {
+        result = data.body.tracks;
+        // vérifie que chaque element de la requete satisfait un minimum de popularité
+        for (const [key, value] of Object.entries(result.items)) {
+          if (value?.popularity > popMax && value?.popularity > 30) {
+            tab.push(value);
+            // modifie la popularité maximum en accordance avec les derniers titres ajouté
+            if (value?.popularity > popMax) {
+              popMax = value.popularity;
+            }
+          }
+        }
+        if (i == 49) {
+          // filtre les titres n'ayant pas la popularité maximal
+          for (let y = 0; y < tab.length; y++) {
+            if (tab[y].popularity < popMax) {
+              tab.splice(y, 1);
+            }
+          }
+          // si plusieurs titre possède la meme popularité, on en garde juste 1
+          if (tab.length > 1) {
+            tab.splice(0, tab.length - 1);
+          }
+          console.log(tab);
+          res.send({
+            DataJour: tab[0],
+          });
+        }
+      },
+      function (err) {
+        console.error(err);
+      }
+    );
+  }
 });
-
 
 //sending request playlist and user
 server.get("/playlist", (req, res) => {
@@ -313,41 +312,6 @@ server.get("/playlist", (req, res) => {
     }
   );
 });
-
-//sending request playlistitems
-server.get("/playlistitems", (req, res)=>{
-    spotifytoken.getPlaylistTracks(itemid).then(function (data){
-        console.log('Retrieved items', data.body);
-        res.send({
-            Playlistitems: data.body
-        })
-    },function (err){
-        console.log('Something went wrong!', err);
-    })
-
-})
-
-server.post("/research",(req,res)=>{
-    const { names } = req.body;
-    console.log(names);
-    if (! names){
-        return res.status(400).send({status:'failed'});
-    }
-  searchresult = names; 
-    })
-
-
-server.get("/research2", (req, res)=>{
-    spotifytoken.searchTracks("track:"+ searchresult)
-         .then(function(data) {
-             console.log('Search by '+ data.body.tracks);
-             res.send({
-                DataSearch: data.body
-             });
-         }, function(err) {
-             console.error(err);
-         });
-})
 
 //recieved id from front to get playlist items
 server.post("/playlist/id", (req, res) => {
