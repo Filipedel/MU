@@ -15,7 +15,7 @@ import { wait } from "@testing-library/user-event/dist/utils/index.js";
 dotenv.config();
 
 const server = express();
-
+dotenv.config()
 server.use(express.json());
 server.use(cookieParser("USER"));
 server.use(express.static("Front/build"));
@@ -335,6 +335,8 @@ server.post("/research",(req,res)=>{
     }
   searchresult = names; 
     })
+
+
 
 
 server.get("/research2", (req, res)=>{
