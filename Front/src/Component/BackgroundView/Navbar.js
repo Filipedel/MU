@@ -22,6 +22,7 @@ const Navigbar = () => {
             <Nav.Link href="/emotions">Emotion</Nav.Link>
             <Nav.Link href="/sonjour">Son du jour</Nav.Link>
             <Nav.Link href="/releases">Sorties FR</Nav.Link>
+            <Nav.Link href="/lyrics">Paroles</Nav.Link>
             <Nav.Link href="/searchTrack">Recherche</Nav.Link>
             <Nav.Link href="/login" disabled>
               Connexion
